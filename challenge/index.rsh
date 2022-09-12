@@ -26,11 +26,7 @@ export const main = Reach.App(()=>{
         const challengeVanna = declassify(interact.getChallenge())
     });
     Vanna.publish(challengeVanna)
-    //const result = (challengePat + (4-challengeVanna)) %3
     commit()
 
-   /* each([Pat,Vanna],()=>{
-        interact.seeResult(result)
-    })*/
 }
 )
