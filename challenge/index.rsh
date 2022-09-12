@@ -1,5 +1,5 @@
 'reach 0.1'
-//2. declare two methods: "getChallenge" & "seeResult"
+//2. declare two methods: "getChallenge" & "seeResult" 
 const Player={
     getChallenge: Fun([],UInt),
     seeResult: Fun([UInt],Null)
@@ -15,7 +15,7 @@ export const main = Reach.App(()=>{
         ...Player,
     })
     init()
-
+    
     Pat.only(()=>{
         const challengePat = declassify(interact.getChallenge())
     });
@@ -27,6 +27,5 @@ export const main = Reach.App(()=>{
     });
     Vanna.publish(challengeVanna)
     commit()
-
 }
 )
