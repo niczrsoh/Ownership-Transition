@@ -23,7 +23,8 @@ export const main = Reach.App(() =>{
     Buyer.only(()=>{
         const description = declassify(interact.getDescription())
     })
-    Buyer.publish(description)
+    Buyer.publish(description,payment)
+    .pay(payment)
     commit()
 }
 )

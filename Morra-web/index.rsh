@@ -2,9 +2,8 @@
 //1. make custom data throughtout this program & the mathematic calculation
 const [isOutput, J_WINS, DRAW, M_WINS] =makeEnum(3)
 const winner = (fingerMarco,fingerJodie,guessMarco,guessJodie) => {
-    return ((fingerMarco+fingerJodie)==guessMarco)? 2:
-    ((fingerMarco+fingerJodie)==guessJodie)? 0:
-    1
+    return (guessMarco==guessJodie)?1:((fingerMarco+fingerJodie)==guessMarco)? 2:
+    ((fingerMarco+fingerJodie)==guessJodie)? 0:1
 } 
 
 //2. do verification by using assert & forall
@@ -18,11 +17,10 @@ forall(UInt, guessMarco=>
             forall(UInt, fingerJodie=>
                 assert(isOutput(winner(fingerMarco,fingerJodie,guessMarco,guessJodie)))))))
 
-/*forall(UInt, guessMarco=>
-    forall(UInt, guessJodie=>
-        forall(UInt,(hand)=> 
-            assert(isOutput(winner(hand,hand,guessMarco,guessJodie))==DRAW))))*/
-
+forall(UInt, fingerMarco=>
+    forall(UInt, fingerJodie=>
+        forall(UInt,(guess)=> 
+            assert(winner(fingerMarco,fingerJodie,guess,guess)==1))))
 
 //3. define the data to be used in this program
 const Player={
