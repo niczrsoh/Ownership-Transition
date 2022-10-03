@@ -69,14 +69,16 @@ export const main = Reach.App(()=>{
     while(outcome==DRAW){
         commit()
         Marco.only(()=>{
-            const guessMarco = declassify(interact.guessNumber())
+            const _guessMarco = interact.guessNumber()
+            const [_commitGuessMarco, _saltGuessMarco] = makeCommitment(interact, _guessMarco)
+            const commitGuessMarco = declassify(_commitGuessMarco)
             const _fingerMarco = interact.giveNumber()
             const [_commitMarco, _saltMarco] = makeCommitment(interact, _fingerMarco)
             const commitMarco = declassify(_commitMarco)
         })
-        Marco.publish(guessMarco,commitMarco)
+        Marco.publish(commitGuessMarco,commitMarco)
         commit()
-        unknowable(Jodie, Marco(_fingerMarco,_saltMarco))
+        unknowable(Jodie, Marco(_guessMarco,_saltGuessMarco,_fingerMarco,_saltMarco))
 
         Jodie.only(()=>{
             const guessJodie = declassify(interact.guessNumber())
@@ -87,12 +89,15 @@ export const main = Reach.App(()=>{
         commit()
 
     Marco.only(()=>{
+        const saltGuessMarco = declassify(_saltGuessMarco)
+        const guessMarco = declassify(_guessMarco) 
         const saltMarco = declassify(_saltMarco)
         const fingerMarco = declassify(_fingerMarco) 
     })
-    Marco.publish(saltMarco,fingerMarco)
+    Marco.publish(saltGuessMarco,guessMarco,saltMarco,fingerMarco)
     .timeout(relativeTime(deadline),()=>closeTo(Jodie, informTimeOut))
     checkCommitment(commitMarco,saltMarco,fingerMarco)
+    checkCommitment(commitGuessMarco,saltGuessMarco,guessMarco)
     outcome = winner(fingerMarco,fingerJodie,guessMarco,guessJodie); 
         continue;
     }
