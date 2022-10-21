@@ -1,7 +1,7 @@
 import React from 'react';
-import PlayerViews from './PlayerViews';
+import OwnershipViews from './OwnershipViews';
 
-const exports = {...PlayerViews};
+const exports = {...OwnershipViews;
 
 exports.Wrapper = class extends React.Component {
   render() {
@@ -48,14 +48,13 @@ exports.Attaching = class extends React.Component {
   }
 }
 
-exports.AcceptTerms = class extends React.Component {
+exports.comfirmPurchase = class extends React.Component {
   render() {
-    const {wager, standardUnit, parent} = this.props;
+    const {price,name, standardUnit, parent} = this.props;
     const {disabled} = this.state || {};
     return (
       <div>
-        The terms of the game are:
-        <br /> Wager: {wager} {standardUnit}
+        Do you want to purchase {name} for {price}{standardUnit}?
         <br />
         <button
           disabled={disabled}
@@ -63,7 +62,7 @@ exports.AcceptTerms = class extends React.Component {
             this.setState({disabled: true});
             parent.termsAccepted();
           }}
-        >Accept terms and pay wager</button>
+        >Accept terms and pay price</button>
       </div>
     );
   }
@@ -79,5 +78,31 @@ exports.WaitingForTurn = class extends React.Component {
     );
   }
 }
+
+  render() {
+    return (
+      <div>
+        Waiting for the other player...
+        <br />Think about which move you want to play.
+      </div>
+    );
+  }
+}
+
+
+
+exports.reportOwner = class extends React.Component {
+    render() {
+      const {item} = this.props;
+      const {disabled} = this.state || {};
+      return (
+        <div>
+         Now Bob owns {item}!
+          <br />
+        </div>
+      );
+    }
+  }
+
 
 export default exports;
