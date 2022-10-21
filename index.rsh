@@ -14,7 +14,7 @@ const manufacturerInteract = {
 };
 const retailerInteract = {
   ...commonInteract,
-  reportOwner: Fun([Bytes(128),Bytes(128)], Null),
+  reportOwner: Fun([Bytes(128)], Null),
   confirmPurchase: Fun([Bytes(128),UInt], Bool)
 };
 export const main = Reach.App(() => {
@@ -50,6 +50,6 @@ export const main = Reach.App(() => {
   commit();
  
   each([manufacturer, retailer], () => interact.reportTransfer(iprice));
-  retailer.interact.reportOwner(rName,iname);
+  retailer.interact.reportOwner(iname);
   exit();
 });
