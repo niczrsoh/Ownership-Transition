@@ -1,7 +1,7 @@
 import React from 'react';
-import OwnerViews from './OwnerViews';
+import OwnershipView from './OwnershipView';
 
-const exports = {...OwnerViews};
+const exports = {...OwnershipView};
 
 const sleep = (milliseconds) => new Promise(resolve => setTimeout(resolve, milliseconds));
 
@@ -20,7 +20,7 @@ exports.Wrapper = class extends React.Component {
 exports.reportName = class extends React.Component {
   render() {
     const {parent} = this.props;
-    const name = (this.state || {}).wager;
+    const name = (this.state || {}).name;
     return (
       <div>
         <input
