@@ -1,7 +1,7 @@
 import React from 'react';
-import PlayerViews from './PlayerViews';
+import OwnerViews from './OwnerViews';
 
-const exports = {...PlayerViews};
+const exports = {...OwnerViews};
 
 const sleep = (milliseconds) => new Promise(resolve => setTimeout(resolve, milliseconds));
 
@@ -17,21 +17,41 @@ exports.Wrapper = class extends React.Component {
   }
 }
 
-exports.SetWager = class extends React.Component {
+exports.reportName = class extends React.Component {
   render() {
-    const {parent, defaultWager, standardUnit} = this.props;
-    const wager = (this.state || {}).wager || defaultWager;
+    const {parent} = this.props;
+    const name = (this.state || {}).wager;
+    return (
+      <div>
+        <input
+          type='text'
+          placeholder={''}
+          onChange={(e) => this.setState({name: e.currentTarget.value})}
+        /> 
+        <br />
+        <button
+          onClick={() => parent.reportName(name)}
+        >Item Name</button>
+      </div>
+    );
+  }
+}
+
+exports.reportPrice = class extends React.Component {
+  render() {
+    const {parent, defaultPrice, standardUnit} = this.props;
+    const price = (this.state || {}).price || defaultPrice;
     return (
       <div>
         <input
           type='number'
-          placeholder={defaultWager}
-          onChange={(e) => this.setState({wager: e.currentTarget.value})}
+          placeholder={defaultPrice}
+          onChange={(e) => this.setState({price: e.currentTarget.value})}
         /> {standardUnit}
         <br />
         <button
-          onClick={() => parent.setWager(wager)}
-        >Set wager</button>
+          onClick={() => parent.reportPrice(price)}
+        >Set price</button>
       </div>
     );
   }
@@ -39,10 +59,10 @@ exports.SetWager = class extends React.Component {
 
 exports.Deploy = class extends React.Component {
   render() {
-    const {parent, wager, standardUnit} = this.props;
+    const {parent, price, standardUnit} = this.props;
     return (
       <div>
-        Wager (pay to deploy): <strong>{wager}</strong> {standardUnit}
+        Price (pay to deploy): <strong>{price}</strong> {standardUnit}
         <br />
         <button
           onClick={() => parent.deploy()}

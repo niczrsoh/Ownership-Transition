@@ -43,11 +43,10 @@ exports.WaitingForResults = class extends React.Component {
 
 exports.Done = class extends React.Component {
   render() {
-    const {outcome} = this.props;
     return (
       <div>
-        Thank you for playing. The outcome of this game was:
-        <br />{outcome || 'Unknown'}
+        Thank you for using this system. The item has ship the ownership to the retailer.
+        <br />
       </div>
     );
   }
