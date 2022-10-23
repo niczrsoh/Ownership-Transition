@@ -69,8 +69,8 @@ class Deployer extends Owner {
     async deploy(){
         const ctc=this.props.acc.contract(backend);
         this.setState({view: 'Deploying', ctc});
-        this.name=this.state.name;
-        this.price=reach.parseCurrency(this.state.price);
+        this.reportName = this.state.name;
+        this.reportPrice = reach.parseCurrency(this.state.price);
         this.deadline={ETH: 10, ALGO: 100, CFX: 1000}[reach.connector];
         backend.manufacturer(ctc, this);
     const ctcInfoStr = JSON.stringify(await ctc.getInfo(), null, 2);

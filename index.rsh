@@ -1,4 +1,5 @@
 'reach 0.1';
+
 const commonInteract = {
   reportUser: Fun([Bytes(3)],Bytes(128)),
   reportReject: Fun([], Null),
@@ -7,8 +8,8 @@ const commonInteract = {
 };
 const manufacturerInteract = {
   ...commonInteract,
-  reportName: Fun([],Bytes(128)),
-  reportPrice: Fun([],UInt),
+  reportName: Bytes(128),
+  reportPrice: UInt,
   reportItemContract: Fun([Bytes(128),Bytes(128),UInt],Null),
   reportShipping: Fun([Bytes(128)],Bytes(256))
 };
@@ -24,8 +25,8 @@ export const main = Reach.App(() => {
   
   manufacturer.only(()=>{
     const mName=declassify(interact.reportUser('man'));
-    const iname=declassify(interact.reportName());
-    const iprice=declassify(interact.reportPrice());
+    const iname=declassify(interact.reportName);
+    const iprice=declassify(interact.reportPrice);
     //interact.reportItemContract(mName,iname,iprice);
   })
   manufacturer.publish(mName, iname,iprice);
