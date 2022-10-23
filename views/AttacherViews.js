@@ -1,7 +1,7 @@
 import React from 'react';
-import PlayerViews from './PlayerViews';
+import OwnershipView from './OwnershipView';
 
-const exports = {...PlayerViews};
+const exports = {...OwnershipView};
 
 exports.Wrapper = class extends React.Component {
   render() {

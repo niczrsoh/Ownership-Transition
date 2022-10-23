@@ -26,14 +26,14 @@ export const main = Reach.App(() => {
     const mName=declassify(interact.reportUser('man'));
     const iname=declassify(interact.reportName());
     const iprice=declassify(interact.reportPrice());
-    interact.reportItemContract(mName,iname,iprice);
+    //interact.reportItemContract(mName,iname,iprice);
   })
-  manufacturer.publish(mName,iname,iprice);
+  manufacturer.publish(mName, iname,iprice);
   commit();
   retailer.only(() => { 
     const rName = declassify(interact.reportUser('ret'));
     const willBuy = declassify(interact.confirmPurchase(iname,iprice)); });
-  retailer.publish(rName,willBuy);
+  retailer.publish(rName, willBuy);
   if (!willBuy) {
     commit();
     each([manufacturer, retailer], () => interact.reportReject());

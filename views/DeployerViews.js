@@ -23,12 +23,14 @@ exports.reportName = class extends React.Component {
     const name = (this.state || {}).name;
     return (
       <div>
+        Item Name: <br></br>
         <input
           type='text'
           placeholder={''}
           onChange={(e) => this.setState({name: e.currentTarget.value})}
         /> 
         <br />
+        <br></br>
         <button
           onClick={() => parent.reportName(name)}
         >Item Name</button>
@@ -59,11 +61,12 @@ exports.reportPrice = class extends React.Component {
 
 exports.Deploy = class extends React.Component {
   render() {
-    const {parent, price, standardUnit} = this.props;
+    const {parent, name, price, standardUnit} = this.props;
     return (
       <div>
+        Item name: <strong>{name}</strong> <br></br>
         Price (pay to deploy): <strong>{price}</strong> {standardUnit}
-        <br />
+        <br /><br></br>
         <button
           onClick={() => parent.deploy()}
         >Deploy</button>
