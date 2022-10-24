@@ -1,7 +1,7 @@
 import React from 'react';
 import OwnershipViews from './OwnershipViews';
 
-const exports = {...OwnershipViews;
+const exports = {...OwnershipViews};
 
 exports.Wrapper = class extends React.Component {
   render() {
@@ -77,7 +77,7 @@ exports.WaitingForTurn = class extends React.Component {
       </div>
     );
   }
-}
+
 
   render() {
     return (
