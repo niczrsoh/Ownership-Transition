@@ -1,7 +1,7 @@
 import React from 'react';
-import PlayerViews from './PlayerViews';
+import OwnershipView from './OwnershipView';
 
-const exports = {...PlayerViews};
+const exports = {...OwnershipView};
 
 const sleep = (milliseconds) => new Promise(resolve => setTimeout(resolve, milliseconds));
 
@@ -16,22 +16,78 @@ exports.Wrapper = class extends React.Component {
     );
   }
 }
-
-exports.SetWager = class extends React.Component {
+exports.Login = class extends React.Component {
   render() {
-    const {parent, defaultWager, standardUnit} = this.props;
-    const wager = (this.state || {}).wager || defaultWager;
+    const uName = (this.state || {}).uName;
+    const password = (this.state || {}).password;
+    const {parent} = this.props;
+    return (
+      <div className='login'>
+        <h2>Login as manufacturer</h2>
+        <br />
+        Enter your username and password
+        <hr />
+        Username: 
+        <input type='text' id='uName' value={uName}  onChange={(e) => this.setState({uName: e.currentTarget.value})}   required/>
+        <br />
+        Password: 
+        <input type='password' name='password' value={password} onChange={(e) => this.setState({password: e.currentTarget.value})}   required/>
+        <br />
+        <button onClick={()=>parent.reportUser(uName,password)}>Save</button>
+      </div>
+    );
+  }
+}
+exports.LoginFail = class extends React.Component {
+  render(){
+    return(
+      <div className="app">
+      <div className="login-form">
+        <div className="title">Login as manufacturer</div>
+        <div>User fails to log in</div>
+      </div>
+    </div>
+    )
+  }
+}
+
+exports.reportName = class extends React.Component {
+  render() {
+    const {parent} = this.props;
+    const name = (this.state || {}).name;
+    return (
+      <div>
+        Item Name: <br></br>
+        <input
+          type='text'
+          placeholder={''}
+          onChange={(e) => this.setState({name: e.currentTarget.value})}
+        /> 
+        <br />
+        <br></br>
+        <button
+          onClick={() => parent.reportName(name)}
+        >Item Name</button>
+      </div>
+    );
+  }
+}
+
+exports.reportPrice = class extends React.Component {
+  render() {
+    const {parent, defaultPrice, standardUnit} = this.props;
+    const price = (this.state || {}).price || defaultPrice;
     return (
       <div>
         <input
           type='number'
-          placeholder={defaultWager}
-          onChange={(e) => this.setState({wager: e.currentTarget.value})}
+          placeholder={defaultPrice}
+          onChange={(e) => this.setState({price: e.currentTarget.value})}
         /> {standardUnit}
         <br />
         <button
-          onClick={() => parent.setWager(wager)}
-        >Set wager</button>
+          onClick={() => parent.reportPrice(price)}
+        >Set price</button>
       </div>
     );
   }
@@ -39,11 +95,12 @@ exports.SetWager = class extends React.Component {
 
 exports.Deploy = class extends React.Component {
   render() {
-    const {parent, wager, standardUnit} = this.props;
+    const {parent, name, price, standardUnit} = this.props;
     return (
       <div>
-        Wager (pay to deploy): <strong>{wager}</strong> {standardUnit}
-        <br />
+        Item name: <strong>{name}</strong> <br></br>
+        Price (pay to deploy): <strong>{price}</strong> {standardUnit}
+        <br /><br></br>
         <button
           onClick={() => parent.deploy()}
         >Deploy</button>

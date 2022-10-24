@@ -1,7 +1,7 @@
 import React from 'react';
-import PlayerViews from './PlayerViews';
+import OwnershipView from './OwnershipView';
 
-const exports = {...PlayerViews};
+const exports = {...OwnershipView};
 
 exports.Wrapper = class extends React.Component {
   render() {
@@ -12,6 +12,40 @@ exports.Wrapper = class extends React.Component {
         {content}
       </div>
     );
+  }
+}
+exports.Login = class extends React.Component {
+  render() {
+    const uName = (this.state || {}).uName;
+    const password = (this.state || {}).password;
+    const {parent} = this.props;
+    return (
+      <div className='login'>
+        <h2>Login as manufacturer</h2>
+        <br />
+        Enter your username and password
+        <hr />
+        Username: 
+        <input type='text' id='uName' value={uName}  onChange={(e) => this.setState({uName: e.currentTarget.value})}   required/>
+        <br />
+        Password: 
+        <input type='password' name='password' value={password} onChange={(e) => this.setState({password: e.currentTarget.value})}   required/>
+        <br />
+        <button onClick={()=>parent.reportUser(uName,password)}>Save</button>
+      </div>
+    );
+  }
+}
+exports.LoginFail = class extends React.Component {
+  render(){
+    return(
+      <div className="app">
+      <div className="login-form">
+        <div className="title">Login as manufacturer</div>
+        <div>User fails to log in</div>
+      </div>
+    </div>
+    )
   }
 }
 
