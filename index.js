@@ -115,7 +115,7 @@ render() { return renderView(this, DeployerViews); }
       confirmPurchase(name, price) { 
       const Price = reach.formatCurrency(priceAtomic, 4);
       return new Promise(resolveAcceptedP => {
-        this.setState({view: 'AcceptTerms', name, price, resolveAcceptedP});
+        this.setState({view: 'WaitingForTurn', name, price, resolveAcceptedP});
       });
     }
    termsAccepted() {
