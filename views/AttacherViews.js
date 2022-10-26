@@ -1,7 +1,7 @@
 import React from 'react';
-import OwnershipViews from './OwnershipViews';
+import OwnershipView from './OwnershipView';
 
-const exports = {...OwnershipViews};
+const exports = {...OwnershipView};
 
 exports.Wrapper = class extends React.Component {
   render() {
@@ -12,6 +12,40 @@ exports.Wrapper = class extends React.Component {
         {content}
       </div>
     );
+  }
+}
+exports.Login = class extends React.Component {
+  render() {
+    const uName = (this.state || {}).uName;
+    const password = (this.state || {}).password;
+    const {parent} = this.props;
+    return (
+      <div className='login'>
+        <h2>Login as manufacturer</h2>
+        <br />
+        Enter your username and password
+        <hr />
+        Username: 
+        <input type='text' id='uName' value={uName}  onChange={(e) => this.setState({uName: e.currentTarget.value})}   required/>
+        <br />
+        Password: 
+        <input type='password' name='password' value={password} onChange={(e) => this.setState({password: e.currentTarget.value})}   required/>
+        <br />
+        <button onClick={()=>parent.reportUser(uName,password)}>Save</button>
+      </div>
+    );
+  }
+}
+exports.LoginFail = class extends React.Component {
+  render(){
+    return(
+      <div className="app">
+      <div className="login-form">
+        <div className="title">Login as manufacturer</div>
+        <div>User fails to log in</div>
+      </div>
+    </div>
+    )
   }
 }
 
@@ -50,7 +84,7 @@ exports.Attaching = class extends React.Component {
 
 exports.comfirmPurchase = class extends React.Component {
   render() {
-    const {price,name, standardUnit, parent} = this.props;
+    const {name,price, standardUnit, parent} = this.props;
     const {disabled} = this.state || {};
     return (
       <div>
@@ -68,17 +102,8 @@ exports.comfirmPurchase = class extends React.Component {
   }
 }
 
+
 exports.WaitingForTurn = class extends React.Component {
-  render() {
-    return (
-      <div>
-        Waiting for the other player...
-        <br />Think about which move you want to play.
-      </div>
-    );
-  }
-
-
   render() {
     return (
       <div>
@@ -89,20 +114,17 @@ exports.WaitingForTurn = class extends React.Component {
   }
 }
 
-
-
 exports.reportOwner = class extends React.Component {
-    render() {
-      const {item} = this.props;
-      const {disabled} = this.state || {};
-      return (
-        <div>
-         Now Bob owns {item}!
-          <br />
-        </div>
-      );
-    }
+  render() {
+    const {item} = this.props;
+    const {disabled} = this.state || {};
+    return (
+      <div>
+       Now Bob owns {item}!
+        <br />
+      </div>
+    );
   }
-
+}
 
 export default exports;
