@@ -5,58 +5,60 @@ const exports = {};
 // Player views must be extended.
 // It does not have its own Wrapper view.
 
-exports.GetHand = class extends React.Component {
+exports.ReportRejectManufacturer = class extends React.Component {
   render() {
-    const {parent, playable, hand} = this.props;
     return (
       <div>
-        {hand ? 'It was a draw! Pick again.' : ''}
-        <br />
-        {!playable ? 'Please wait...' : ''}
-        <br />
-        <button
-          disabled={!playable}
-          onClick={() => parent.playHand('ROCK')}
-        >Rock</button>
-        <button
-          disabled={!playable}
-          onClick={() => parent.playHand('PAPER')}
-        >Paper</button>
-        <button
-          disabled={!playable}
-          onClick={() => parent.playHand('SCISSORS')}
-        >Scissors</button>
+        'Retailer reject the item'
       </div>
     );
   }
 }
-
-exports.WaitingForResults = class extends React.Component {
+exports.ReportRejectRetailer = class extends React.Component {
   render() {
     return (
       <div>
-        Waiting for results...
+       'You reject the item'
       </div>
     );
   }
 }
-
-exports.Done = class extends React.Component {
+exports.ReportPaymentManufacturer = class extends React.Component {
   render() {
+    const {payment} = this.props;
     return (
       <div>
-        Thank you for using this system. The item has ship the ownership to the retailer.
-        <br />
+       'Retailer paid {payment} Algo to the contract'
       </div>
     );
   }
 }
-
-exports.Timeout = class extends React.Component {
+exports.ReportPaymentRetailer = class extends React.Component {
   render() {
+    const {payment} = this.props;
     return (
       <div>
-        There's been a timeout. (Someone took too long.)
+       'You paid {payment} Algo to the contract'
+      </div>
+    );
+  }
+}
+exports.ReportTransferManufacturer = class extends React.Component {
+  render() {
+    const {payment} = this.props;
+    return (
+      <div>
+       'The contract paid {payment} to you'
+      </div>
+    );
+  }
+}
+exports.ReportTransferRetailer = class extends React.Component {
+  render() {
+    const {parent,payment} = this.props;
+    return (
+      <div>
+       'You paid {payment} to the contract'
       </div>
     );
   }

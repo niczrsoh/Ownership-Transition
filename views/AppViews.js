@@ -8,14 +8,13 @@ exports.Wrapper = class extends React.Component {
     return (
       <div className="App">
         <header className="App-header" id="root">
-          <h1>Rock, Paper, Scissors</h1>
+          <h1>Ownership Transition</h1>
           {content}
         </header>
       </div>
     );
   }
 }
-
 exports.ConnectAccount = class extends React.Component {
   render() {
     return (
@@ -63,14 +62,14 @@ exports.DeployerOrAttacher = class extends React.Component {
         <p>
           <button
             onClick={() => parent.selectDeployer()}
-          >Deployer</button>
+          >Manufacturer</button>
           <br /> Set the wager, deploy the contract.
         </p>
         <p>
           <button
             onClick={() => parent.selectAttacher()}
-          >Attacher</button>
-          <br /> Attach to the Deployer's contract.
+          >Retailer</button>
+          <br /> Attach to the Manufacturer's contract.
         </p>
       </div>
     );
