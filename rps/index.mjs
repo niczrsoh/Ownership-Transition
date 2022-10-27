@@ -27,7 +27,7 @@ if(createAcc){
 }else{
     //asking the user on the existing account
     const secret = await ask.ask(
-        'What is your acocunt secret?',(x=>x)
+        'What is your account secret?',(x=>x)
     );
     //load the existing account
     acc=await stdlib.newAccountFromSecret(secret);

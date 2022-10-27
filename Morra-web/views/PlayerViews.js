@@ -7,10 +7,10 @@ const exports = {};
 
 exports.GuessNumber = class extends React.Component {
   render() {
-    const {parent, playable, hand} = this.props;
+    const {parent, playable, guess} = this.props;
     return (
       <div>
-        {hand ? 'It was a draw! Guess again.' : ''}
+        {guess ? 'It was a draw! Guess again.' : ''}
         <br />
         {!playable ? 'Please wait...' : ''}
         <br />
@@ -18,47 +18,47 @@ exports.GuessNumber = class extends React.Component {
         <h3>You can guess any number from 0 to 10 </h3>
         <button
           disabled={!playable}
-          onClick={() => parent.playMorra(0)}
+          onClick={() => parent.playGuest(0)}
         >0</button>
         <button
           disabled={!playable}
-          onClick={() => parent.playMorra(1)}
+          onClick={() => parent.playGuest(1)}
         >1</button>
         <button
           disabled={!playable}
-          onClick={() => parent.playMorra(2)}
+          onClick={() => parent.playGuest(2)}
         >2</button>
             <button
           disabled={!playable}
-          onClick={() => parent.playMorra(3)}
+          onClick={() => parent.playGuest(3)}
         >3</button>
             <button
           disabled={!playable}
-          onClick={() => parent.playMorra(4)}
+          onClick={() => parent.playGuest(4)}
         >4</button>
           <button
           disabled={!playable}
-          onClick={() => parent.playMorra(5)}
+          onClick={() => parent.playGuest(5)}
         >5</button>
             <button
           disabled={!playable}
-          onClick={() => parent.playMorra(6)}
+          onClick={() => parent.playGuest(6)}
         >6</button>
             <button
           disabled={!playable}
-          onClick={() => parent.playMorra(7)}
+          onClick={() => parent.playGuest(7)}
         >7</button>
             <button
           disabled={!playable}
-          onClick={() => parent.playMorra(8)}
+          onClick={() => parent.playGuest(8)}
         >8</button>
             <button
           disabled={!playable}
-          onClick={() => parent.playMorra(9)}
+          onClick={() => parent.playGuest(9)}
         >9</button>
             <button
           disabled={!playable}
-          onClick={() => parent.playMorra(10)}
+          onClick={() => parent.playGuest(10)}
         >10</button>
       </div>
     );
@@ -114,6 +114,15 @@ exports.WaitingForResults = class extends React.Component {
     );
   }
 }
+exports.DoneForPlayNum = class extends React.Component {
+  render() {
+    return (
+      <div>
+        Finish guessing..
+      </div>
+    );
+  }
+}
 
 exports.Done = class extends React.Component {
   render() {
@@ -136,5 +145,14 @@ exports.Timeout = class extends React.Component {
     );
   }
 }
-
+exports.Draw = class extends React.Component {
+  render() {
+    return (
+      <div>
+        Just now is a DRAW! So lets start over...
+        Waiting ....
+      </div>
+    );
+  }
+}
 export default exports;

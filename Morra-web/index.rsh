@@ -28,7 +28,8 @@ const Player={
     guessNumber: Fun([],UInt),
     giveNumber: Fun([],UInt),
     seeOutcome: Fun([UInt],Null),
-    informTimeOut: Fun([],Null)
+    informTimeOut: Fun([],Null),
+    informDraw: Fun([],Null)
 }
 
 //4. app initialization & define the users & timeout function who will interact with the objects
@@ -76,7 +77,7 @@ export const main = Reach.App(()=>{
             const [_commitMarco, _saltMarco] = makeCommitment(interact, _fingerMarco)
             const commitMarco = declassify(_commitMarco)
         })
-        Marco.publish(commitGuessMarco,commitMarco)
+        Marco.publish(commitGuessMarco,commitMarco).timeout(relativeTime(deadline),()=>closeTo(Jodie, informTimeOut))
         commit()
         unknowable(Jodie, Marco(_guessMarco,_saltGuessMarco,_fingerMarco,_saltMarco))
 
@@ -87,19 +88,25 @@ export const main = Reach.App(()=>{
         Jodie.publish(guessJodie,fingerJodie)
         .timeout(relativeTime(deadline),()=>closeTo(Marco, informTimeOut))
         commit()
-
+       
     Marco.only(()=>{
         const saltGuessMarco = declassify(_saltGuessMarco)
         const guessMarco = declassify(_guessMarco) 
         const saltMarco = declassify(_saltMarco)
         const fingerMarco = declassify(_fingerMarco) 
+        if(winner(fingerMarco,fingerJodie,guessMarco,guessJodie)==DRAW){
+            interact.informDraw()
+        }
     })
     Marco.publish(saltGuessMarco,guessMarco,saltMarco,fingerMarco)
     .timeout(relativeTime(deadline),()=>closeTo(Jodie, informTimeOut))
     checkCommitment(commitMarco,saltMarco,fingerMarco)
     checkCommitment(commitGuessMarco,saltGuessMarco,guessMarco)
+    if(winner(fingerMarco,fingerJodie,guessMarco,guessJodie)==DRAW){
+        Jodie.interact.informDraw()
+    }
     outcome = winner(fingerMarco,fingerJodie,guessMarco,guessJodie); 
-        continue;
+    continue;
     }
     //9. assert that the outcome after the loop should not have Draw
     assert(outcome==M_WINS||outcome==J_WINS)
