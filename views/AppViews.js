@@ -9,6 +9,8 @@ exports.Wrapper = class extends React.Component {
       <div className="App">
         <header className="App-header" id="root">
           <h1>Ownership Transition</h1>
+          <h1>Ownership Transition</h1>
+          <br></br>
           {content}
         </header>
       </div>

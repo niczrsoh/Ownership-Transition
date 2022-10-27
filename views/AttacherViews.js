@@ -25,12 +25,12 @@ exports.Login = class extends React.Component {
         <br />
         Enter your username and password
         <hr />
-        Username: 
+        Username: &nbsp;
         <input type='text' id='uName' value={uName}  onChange={(e) => this.setState({uName: e.currentTarget.value})}   required/>
         <br />
-        Password: 
+        Password: &nbsp;
         <input type='password' name='password' value={password} onChange={(e) => this.setState({password: e.currentTarget.value})}   required/>
-        <br />
+        <br /><br></br>
         <button onClick={()=>parent.reportUser(uName,password)}>Save</button>
       </div>
     );
@@ -84,12 +84,11 @@ exports.Attaching = class extends React.Component {
 
 exports.AcceptTerms = class extends React.Component {
   render() {
-    const {wager, standardUnit, parent} = this.props;
+    const {price, standardUnit, parent} = this.props;
     const {disabled} = this.state || {};
     return (
       <div>
-        The terms of the game are:
-        <br /> Wager: {wager} {standardUnit}
+        <br /> Price: {price} {standardUnit}
         <br />
         <button
           disabled={disabled}
@@ -97,7 +96,7 @@ exports.AcceptTerms = class extends React.Component {
             this.setState({disabled: true});
             parent.termsAccepted();
           }}
-        >Accept terms and pay wager</button>
+        >Accept terms and pay</button>
       </div>
     );
   }

@@ -44,7 +44,6 @@ class App extends React.Component{
 }
 
 class Owner extends React.Component {
-
     reportReject(role){ 
       if(role=='M') this.setState({view: 'ReportRejectManufacturer'}) 
       else this.setState({view: 'ReportRejectRetailer'}) 
@@ -60,9 +59,15 @@ reportTransfer(role,payment){
   }
 
   class Deployer extends Owner {
+    random(){return reach.hasRandom.random();}
     constructor(props){
       super(props);
-      this.state = {view:'Login', price: 0, name: "", user: "",ctcInfoStr: ""}
+      const min=1000000000;
+      const max=9999999999;
+      const id = Math.floor(Math.random() * (max - min + 1) ) + min;
+      console.log(id);
+      this.reportID = id;
+      this.state = {view:'Login', price: 0, name: "", user: "", id, ctcInfoStr: ""}
   }
     reportUser(user,uPw){
       console.log("username: "+user+"password: "+uPw)
@@ -112,10 +117,10 @@ render() { return renderView(this, DeployerViews); }
       this.setState({view: 'Attaching'});
       backend.retailer(ctc, this);
     }
-    async acceptWager(wagerAtomic) { 
-      const wager = reach.formatCurrency(wagerAtomic, 4);
+    async confirmPurchase(priceAtomic) { 
+      const price = reach.formatCurrency(priceAtomic, 4);
       return await new Promise(resolveAcceptedP => {
-        this.setState({view: 'AcceptTerms', wager, resolveAcceptedP});
+        this.setState({view: 'AcceptTerms', price, resolveAcceptedP});
       });
     }
     termsAccepted() {

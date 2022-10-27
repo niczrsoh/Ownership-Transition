@@ -24,15 +24,16 @@ exports.Login = class extends React.Component {
     return (
       <div className='login'>
         <h2>Login as manufacturer</h2>
-        <br />
+        
         Enter your username and password
         <hr />
-        Username: 
+        Username: &nbsp;
         <input type='text' id='uName' value={uName}  onChange={(e) => this.setState({uName: e.currentTarget.value})}   required/>
         <br />
-        Password: 
+        Password: &nbsp;
         <input type='password' name='password' value={password} onChange={(e) => this.setState({password: e.currentTarget.value})}   required/>
         <br />
+        <br></br>
         <button onClick={()=>parent.reportUser(uName,password)}>Save</button>
       </div>
     );
@@ -85,6 +86,7 @@ exports.reportPrice = class extends React.Component {
           onChange={(e) => this.setState({price: e.currentTarget.value})}
         /> {standardUnit}
         <br />
+        <br></br>
         <button
           onClick={() => parent.reportPrice(price)}
         >Set price</button>
@@ -95,9 +97,10 @@ exports.reportPrice = class extends React.Component {
 
 exports.Deploy = class extends React.Component {
   render() {
-    const {parent, name, price, standardUnit} = this.props;
+    const {parent, name, price, id, standardUnit} = this.props;
     return (
       <div>
+        Item ID: <strong> {id} </strong> <br></br>
         Item name: <strong>{name}</strong> <br></br>
         Price (pay to deploy): <strong>{price}</strong> {standardUnit}
         <br /><br></br>
