@@ -16,7 +16,7 @@ const manufacturerInteract = {
 const retailerInteract = {
   ...commonInteract,
   reportUser: Bytes(128),//zr
-  reportOwner: Fun([Bytes(128),Bytes(128)], Null),
+  reportOwner: Fun([Bytes(128)], Null),
   confirmPurchase: Fun([Bytes(128),UInt], Bool)
 };
 export const main = Reach.App(() => {
@@ -35,9 +35,9 @@ export const main = Reach.App(() => {
   commit();
   
   retailer.only(() => { 
-    const rName = declassify(interact.reportUser);
+    //const rName = declassify(interact.reportUser);
     const willBuy = declassify(interact.confirmPurchase(iname,iprice)); });
-  retailer.publish(rName,willBuy);
+  retailer.publish(willBuy);
 
   if (!willBuy) {
     commit();
@@ -58,6 +58,6 @@ export const main = Reach.App(() => {
  
   manufacturer.interact.reportTransfer('M',iprice);
   retailer.interact.reportTransfer('R',iprice);
-  retailer.interact.reportOwner(rName,iname);
+  retailer.interact.reportOwner(iname);
   exit();
 });

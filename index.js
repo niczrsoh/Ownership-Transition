@@ -99,35 +99,42 @@ render() { return renderView(this, DeployerViews); }
     //edit and change the retailer functions here!!
     constructor(props) {
       super(props);
-      this.state = {view: 'Login',user: ""};
+      this.state = {view: 'Attach',user: "",iname: "", iprice:0};
     }
-    reportUser(user,uPw){
+    /*reportUser(user,uPw){
       console.log("username: "+user+"password: "+uPw)
         if(user=='bob'&&uPw=='1234'){
           console.log(`Successfully login...`)
           this.setState({view:"Attach"})
         }else{
           console.log(`Unsuccessfully login...`)
-          this.setState({view: 'LoginFail', who: 'manufacturer'})
+          this.setState({view: 'LoginFail', who: 'retailer'})
         }
-    }  
+    }  */
+    
     attach(ctcInfoStr) {
-      this.reportUser = this.state.user;
       const ctc = this.props.acc.contract(backend, JSON.parse(ctcInfoStr));
-      this.setState({view: 'Attaching'});
+      this.setState({view: 'Attaching',ctc});
       backend.retailer(ctc, this);
     }
-    async confirmPurchase(priceAtomic) { 
-      const price = reach.formatCurrency(priceAtomic, 4);
+
+    async confirmPurchase(name,price){
+      price = parseInt(price);
+      console.log(name+" "+price);
       return await new Promise(resolveAcceptedP => {
-        this.setState({view: 'AcceptTerms', price, resolveAcceptedP});
+          this.setState({view: 'ConfirmPurchase', name, price, resolveAcceptedP});
       });
     }
-    termsAccepted() {
+
+    confirmPurchase2(){
       this.state.resolveAcceptedP();
-      this.setState({view: 'WaitingForTurn'});
+      this.setState({view:'reportOwner'})
     }
-    render() { return renderView(this, AttacherViews); }
+
+    reportOwner(name){
+          this.setState({view: 'reportOwner',name});
+      };
+      render(){return renderView(this, AttacherViews);}
   }
 
   renderDOM(<App />);

@@ -118,5 +118,36 @@ exports.WaitingForTurn = class extends React.Component {
     );
   }
 }
+exports.ConfirmPurchase = class extends React.Component {
+  render() {
+    const {name, price, standardUnit,parent} = this.props;
+    const {disabled} = this.state || {};
+    return (
+      <div>
+        Do you want to purchase {name} for {price}{standardUnit}?
+        <br />
+        <button
+        disabled={disabled}
+          onClick={() => {
+            this.setState({disabled: true});
+            parent.confirmPurchase2();
+          }}
+        >Accept terms and pay price</button>
+      </div>
+    );
+  }
+}
 
+exports.reportOwner = class extends React.Component {
+    render() {
+      const {item} = this.props;
+      const {disabled} = this.state || {};
+      return (
+        <div>
+         Now Bob owns {item}!
+          <br />
+        </div>
+      );
+    }
+  }
 export default exports;
