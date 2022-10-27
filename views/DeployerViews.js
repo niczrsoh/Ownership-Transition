@@ -27,13 +27,19 @@ exports.Login = class extends React.Component {
         
         Enter your username and password
         <hr />
-        Username: &nbsp;
-        <input type='text' id='uName' value={uName}  onChange={(e) => this.setState({uName: e.currentTarget.value})}   required/>
-        <br />
-        Password: &nbsp;
-        <input type='password' name='password' value={password} onChange={(e) => this.setState({password: e.currentTarget.value})}   required/>
-        <br />
         <br></br>
+        <div class="group">
+        <input type='text' id='uName' value={uName}  onChange={(e) => this.setState({uName: e.currentTarget.value})}   required/>
+        <span class="highlight"></span>
+        <span class="bar"></span>
+        <label>Username: &nbsp;</label>
+        </div>
+        <div class="group">
+        <input type='password' name='password' value={password} onChange={(e) => this.setState({password: e.currentTarget.value})}   required/>
+        <span class="highlight"></span>
+      <span class="bar"></span>
+        <label>Password: &nbsp;</label>
+        </div>
         <button onClick={()=>parent.reportUser(uName,password)}>Save</button>
       </div>
     );
@@ -58,17 +64,19 @@ exports.reportName = class extends React.Component {
     const name = (this.state || {}).name;
     return (
       <div>
-        Item Name: <br></br>
+        <div class="group">
         <input
           type='text'
           placeholder={''}
           onChange={(e) => this.setState({name: e.currentTarget.value})}
         /> 
-        <br />
-        <br></br>
+        <span class="highlight"></span>
+      <span class="bar"></span>
+        <label>Item Name:</label>
+        </div>
         <button
           onClick={() => parent.reportName(name)}
-        >Item Name</button>
+        >Confirm</button>
       </div>
     );
   }
@@ -80,16 +88,20 @@ exports.reportPrice = class extends React.Component {
     const price = (this.state || {}).price || defaultPrice;
     return (
       <div>
+        <div class="group">
+          <br></br>
         <input
           type='number'
           placeholder={defaultPrice}
           onChange={(e) => this.setState({price: e.currentTarget.value})}
-        /> {standardUnit}
-        <br />
-        <br></br>
+        /> 
+        <span class="highlight"></span>
+      <span class="bar"></span>
+      <label><font size="+1">Price: <strong>({standardUnit})</strong></font></label>
+        </div>
         <button
           onClick={() => parent.reportPrice(price)}
-        >Set price</button>
+        >Confirm</button>
       </div>
     );
   }

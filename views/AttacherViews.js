@@ -21,16 +21,22 @@ exports.Login = class extends React.Component {
     const {parent} = this.props;
     return (
       <div className='login'>
-        <h2>Login as manufacturer</h2>
-        <br />
+        <h2>Login as retailer</h2>
         Enter your username and password
         <hr />
-        Username: &nbsp;
+        <br></br>
+        <div class="group">
         <input type='text' id='uName' value={uName}  onChange={(e) => this.setState({uName: e.currentTarget.value})}   required/>
-        <br />
-        Password: &nbsp;
+        <span class="highlight"></span>
+        <span class="bar"></span>
+        <label>Username: &nbsp;</label>
+        </div>
+        <div class="group">
         <input type='password' name='password' value={password} onChange={(e) => this.setState({password: e.currentTarget.value})}   required/>
-        <br /><br></br>
+        <span class="highlight"></span>
+      <span class="bar"></span>
+        <label>Password: &nbsp;</label>
+        </div>
         <button onClick={()=>parent.reportUser(uName,password)}>Save</button>
       </div>
     );
