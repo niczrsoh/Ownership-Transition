@@ -86,7 +86,7 @@ reportTransfer(role,payment){
       this.setState({view: 'Deploying', ctc});
       this.reportUser = this.state.user;
       this.reportName = this.state.name;
-      this.reportPrice = reach.parseCurrency(this.state.price);
+      this.reportPrice = this.state.price;
       this.deadline={ETH: 10, ALGO: 100, CFX: 1000}[reach.connector];
       backend.manufacturer(ctc, this);
   const ctcInfoStr = JSON.stringify(await ctc.getInfo(), null, 2);
@@ -99,9 +99,9 @@ render() { return renderView(this, DeployerViews); }
     //edit and change the retailer functions here!!
     constructor(props) {
       super(props);
-      this.state = {view: 'Attach',user: "",iname: "", iprice:0};
+      this.state = {view: "Login",user: "",iname: "", iprice:0};
     }
-    /*reportUser(user,uPw){
+    reportUser(user,uPw){
       console.log("username: "+user+"password: "+uPw)
         if(user=='bob'&&uPw=='1234'){
           console.log(`Successfully login...`)
@@ -110,9 +110,10 @@ render() { return renderView(this, DeployerViews); }
           console.log(`Unsuccessfully login...`)
           this.setState({view: 'LoginFail', who: 'retailer'})
         }
-    }  */
+    }  
     
     attach(ctcInfoStr) {
+      this.reportUser = this.state.user;
       const ctc = this.props.acc.contract(backend, JSON.parse(ctcInfoStr));
       this.setState({view: 'Attaching',ctc});
       backend.retailer(ctc, this);
