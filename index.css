@@ -6,8 +6,7 @@ body {
   }
   
   code {
-    font-family: "Poppins", sans-serif,
-      monospace;
+    font-family: Copperplate, "Copperplate Gothic Light", fantasy;
   }
   .App {
     text-align: center;
@@ -23,6 +22,7 @@ body {
     justify-content: center;
     font-size: calc(10px + 2vmin);
     color: white;
+    font-family: "Poppins", sans-serif;
   }
 
   @import url("https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900");
@@ -91,6 +91,7 @@ input 				{
   width:300px;
   border:none;
   border-bottom:1px solid #757575;
+  font-family: monaco, Consolas, "Lucida Console", monospace;
 }
 input:focus 		{ outline:none; }
 
@@ -190,7 +191,7 @@ input:focus ~ .highlight {
     box-sizing: border-box;
     text-decoration:none;
     text-transform:uppercase;
-    font-family:'Roboto',sans-serif;
+    font-family: monaco, Consolas, "Lucida Console", monospace;
     font-weight:400;
     color:#000000;
     text-align:center;
@@ -208,14 +209,26 @@ input:focus ~ .highlight {
   
   textarea {
     font-size: calc(10px + 2vmin);
+    font-family: monaco, Consolas, "Lucida Console", monospace;
   }
   
   .ContractInfo {
     font-size: calc(10px + 1vmin);
-    text-align: left;
-    width: 90vw;
+    text-align: justify;
+    width: 30vw;
     height: 7em;
     padding: 2vw;
-    overflow-x: scroll;
     white-space: pre;
+    background-color:#91fff8;
+    color: #3d8a7c;
+    display: block;
+    border: solid black 2px;
+    overflow-x: scroll;
+    overflow-y: scroll;
+    box-shadow: inset;
+    font-family: monaco, Consolas, "Lucida Console", monospace;
+  }
+
+  div{
+    font-family: Copperplate, "Copperplate Gothic Light", fantasy;
   }
