@@ -49,13 +49,16 @@ class Owner extends React.Component {
       else this.setState({view: 'ReportRejectRetailer'}) 
   }
   reportPayment(role,payment){ 
+    payment = parseInt(payment);
     if(role=='M') this.setState({view: 'ReportPaymentManufacturer',payment}) 
     else this.setState({view: 'ReportPaymentRetailer',payment}) 
 }
 reportTransfer(role,payment){ 
+  payment = parseInt(payment);
   if(role=='M') this.setState({view: 'ReportTransferManufacturer',payment}) 
   else this.setState({view: 'ReportTransferRetailer',payment}) 
 }
+
   }
 
   class Deployer extends Owner {
@@ -99,7 +102,7 @@ render() { return renderView(this, DeployerViews); }
     //edit and change the retailer functions here!!
     constructor(props) {
       super(props);
-      this.state = {view: "Login",user: "",iname: "", iprice:0};
+      this.state = {view: "Login",user: "",iname: "", iprice:0, answer: false};
     }
     reportUser(user,uPw){
       console.log("username: "+user+"password: "+uPw)
@@ -127,8 +130,8 @@ render() { return renderView(this, DeployerViews); }
       });
     }
 
-    confirmPurchase2(){
-      this.state.resolveAcceptedP();
+    confirmPurchase2(answer){
+      this.state.resolveAcceptedP(answer);
       this.setState({view:'reportOwner'})
     }
 

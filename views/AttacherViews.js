@@ -130,7 +130,7 @@ exports.ConfirmPurchase = class extends React.Component {
         disabled={disabled}
           onClick={() => {
             this.setState({disabled: true});
-            parent.confirmPurchase2();
+            parent.confirmPurchase2(true);
           }}
         >Accept terms and pay price</button>
       </div>
@@ -141,11 +141,11 @@ exports.ConfirmPurchase = class extends React.Component {
 
 exports.reportOwner = class extends React.Component {
     render() {
-      const {item} = this.props;
+      const {name} = this.props;
       const {disabled} = this.state || {};
       return (
         <div>
-         Now Bob owns {item}!
+         Now Bob owns {name}!
           <br />
         </div>
       );
