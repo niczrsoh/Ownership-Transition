@@ -1,4 +1,5 @@
 'reach 0.1';
+
 const commonInteract = {
   reportReject: Fun([Bytes(1)], Null),
   reportPayment: Fun([Bytes(1),UInt], Null),

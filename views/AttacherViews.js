@@ -138,6 +138,7 @@ exports.ConfirmPurchase = class extends React.Component {
   }
 }
 
+
 exports.reportOwner = class extends React.Component {
     render() {
       const {item} = this.props;
