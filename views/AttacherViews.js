@@ -25,16 +25,16 @@ exports.Login = class extends React.Component {
         Enter your username and password
         <hr />
         <br></br>
-        <div class="group">
+        <div className="group">
         <input type='text' id='uName' value={uName}  onChange={(e) => this.setState({uName: e.currentTarget.value})}   required/>
-        <span class="highlight"></span>
-        <span class="bar"></span>
+        <span className="highlight"></span>
+        <span className="bar"></span>
         <label>Username: &nbsp;</label>
         </div>
-        <div class="group">
+        <div className="group">
         <input type='password' name='password' value={password} onChange={(e) => this.setState({password: e.currentTarget.value})}   required/>
-        <span class="highlight"></span>
-      <span class="bar"></span>
+        <span className="highlight"></span>
+      <span className="bar"></span>
         <label>Password: &nbsp;</label>
         </div>
         <button onClick={()=>parent.reportUser(uName,password)}>Save</button>
@@ -62,7 +62,7 @@ exports.Attach = class extends React.Component {
     return (
       <div>
         Please paste the contract info to attach to:
-        <br />
+        <br /><br></br>
         <textarea spellCheck="false"
           className='ContractInfo'
           onChange={(e) => this.setState({ctcInfoStr: e.currentTarget.value})}
@@ -124,7 +124,7 @@ exports.ConfirmPurchase = class extends React.Component {
     const {disabled} = this.state || {};
     return (
       <div>
-        Do you want to purchase {name} for {price}{standardUnit}?
+        Do you want to purchase <h4 id='itemname'>{name}</h4> for {price}{standardUnit}?
         <br />
         <button
         disabled={disabled}
@@ -141,11 +141,11 @@ exports.ConfirmPurchase = class extends React.Component {
 
 exports.reportOwner = class extends React.Component {
     render() {
-      const {item} = this.props;
+      const {name} = this.props;
       const {disabled} = this.state || {};
       return (
         <div>
-         Now Bob owns {item}!
+         Now Bob owns <h4 id='itemname'>{name}!</h4>
           <br />
         </div>
       );

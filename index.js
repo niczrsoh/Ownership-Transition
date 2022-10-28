@@ -49,10 +49,12 @@ class Owner extends React.Component {
       else this.setState({view: 'ReportRejectRetailer'}) 
   }
   reportPayment(role,payment){ 
+    payment=parseInt(payment);
     if(role=='M') this.setState({view: 'ReportPaymentManufacturer',payment}) 
     else this.setState({view: 'ReportPaymentRetailer',payment}) 
 }
 reportTransfer(role,payment){ 
+  payment=parseInt(payment);
   if(role=='M') this.setState({view: 'ReportTransferManufacturer',payment}) 
   else this.setState({view: 'ReportTransferRetailer',payment}) 
 }
