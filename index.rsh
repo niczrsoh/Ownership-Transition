@@ -35,9 +35,9 @@ export const main = Reach.App(() => {
   commit();
   
   retailer.only(() => { 
-    //const rName = declassify(interact.reportUser);
+    const rName = declassify(interact.reportUser);
     const willBuy = declassify(interact.confirmPurchase(iname,iprice)); });
-  retailer.publish(willBuy);
+  retailer.publish(rName,willBuy);
 
   if (!willBuy) {
     commit();
