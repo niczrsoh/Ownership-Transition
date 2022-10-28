@@ -133,7 +133,15 @@ exports.ConfirmPurchase = class extends React.Component {
             parent.confirmPurchase2(true);
           }}
         >Accept terms and pay price</button>
-      </div>
+      <br />
+      <button
+      onClick={() => {
+        this.setState({disabled: true});
+        parent.reportReject();
+      } }
+    >I dont want this item</button>
+    <br />
+    </div>
     );
   }
 }
