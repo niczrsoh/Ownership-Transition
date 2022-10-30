@@ -11,8 +11,6 @@ const reach = loadStdlib(process.env)
 import {ALGO_MyAlgoConnect as MyAlgoConnect} 
  from '@reach-sh/stdlib';
 reach.setWalletFallback(reach.walletFallback({providerEnv:'TestNet', MyAlgoConnect }));
-const handToInt = {'ROCK': 0, 'PAPER': 1, 'SCISSORS': 2};
-const intToOutcome = ['Bob wins!', 'Draw!', 'Alice wins!'];
 const {standardUnit} = reach;
 const defaults = {defaultFundAmt: '10', defaultPrice: '1', standardUnit};
 
