@@ -21,7 +21,7 @@ exports.Login = class extends React.Component {
     const {parent} = this.props;
     return (
       <div className='login'>
-        <h2>Login as retailer</h2>
+        <h2>Login as attacher</h2>
         Enter your username and password
         <hr />
         <br></br>

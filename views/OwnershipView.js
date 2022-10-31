@@ -2,14 +2,11 @@ import React from 'react';
 
 const exports = {};
 
-// Player views must be extended.
-// It does not have its own Wrapper view.
-
 exports.ReportRejectManufacturer = class extends React.Component {
   render() {
     return (
       <div>
-        Retailer reject the item
+        The attacher reject the item
       </div>
     );
   }
