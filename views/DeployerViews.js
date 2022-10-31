@@ -47,11 +47,15 @@ exports.Login = class extends React.Component {
 }
 exports.LoginFail = class extends React.Component {
   render(){
+    const {parent} = this.props;
     return(
       <div className="app">
       <div className="login-form">
         <div className="title">Login as manufacturer</div>
         <div>User fails to log in</div>
+        <button
+          onClick={() => parent.class}
+        >Login Again</button>
       </div>
     </div>
     )

@@ -23,32 +23,14 @@ exports.ReportRejectRetailer = class extends React.Component {
     );
   }
 }
-exports.ReportPaymentManufacturer = class extends React.Component {
-  render() {
-    const {payment} = this.props;
-    return (
-      <div>
-       Retailer paid {payment} Algo to the contract
-      </div>
-    );
-  }
-}
-exports.ReportPaymentRetailer = class extends React.Component {
-  render() {
-    const {payment} = this.props;
-    return (
-      <div>
-       You paid {payment} Algo to the contract
-      </div>
-    );
-  }
-}
 exports.ReportTransferManufacturer = class extends React.Component {
   render() {
     const {payment} = this.props;
     return (
       <div>
-       The contract paid {payment} to you
+       Retailer paid {payment} Algo to the contract <br/><br/>
+       The contract paid {payment} Algo to you <br/><br/>
+       Now Retailer own the item
       </div>
     );
   }
@@ -58,7 +40,8 @@ exports.ReportTransferRetailer = class extends React.Component {
     const {payment} = this.props;
     return (
       <div>
-       You paid {payment} to the contract
+       You paid {payment} Algo to the contract <br/><br/>
+       Now you own the item
       </div>
     );
   }

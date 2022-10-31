@@ -1,7 +1,6 @@
 'reach 0.1';
 const commonInteract = {
   reportReject: Fun([Bytes(1)], Null),
-  reportPayment: Fun([Bytes(1),UInt], Null),
   reportTransfer: Fun([Bytes(1),UInt], Null)
 };
 const manufacturerInteract = {
@@ -45,13 +44,10 @@ export const main = Reach.App(() => {
   } 
   commit();
   retailer.pay(iprice);
-  manufacturer.interact.reportPayment('M',iprice);
-  retailer.interact.reportPayment('R',iprice);
   transfer(iprice).to(manufacturer);
-  commit();
- 
   manufacturer.interact.reportTransfer('M',iprice);
   retailer.interact.reportTransfer('R',iprice);
-  retailer.interact.reportOwner(iname);
+  commit();
+
   exit();
 });

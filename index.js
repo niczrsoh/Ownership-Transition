@@ -11,8 +11,6 @@ const reach = loadStdlib(process.env)
 import {ALGO_MyAlgoConnect as MyAlgoConnect} 
  from '@reach-sh/stdlib';
 reach.setWalletFallback(reach.walletFallback({providerEnv:'TestNet', MyAlgoConnect }));
-const handToInt = {'ROCK': 0, 'PAPER': 1, 'SCISSORS': 2};
-const intToOutcome = ['Bob wins!', 'Draw!', 'Alice wins!'];
 const {standardUnit} = reach;
 const defaults = {defaultFundAmt: '10', defaultPrice: '1', standardUnit};
 
@@ -44,20 +42,17 @@ class App extends React.Component{
 }
 
 class Owner extends React.Component {
+
     reportReject(role){ 
       if(role=='M') this.setState({view: 'ReportRejectManufacturer'}) 
       else this.setState({view: 'ReportRejectRetailer'}) 
-  }
-  reportPayment(role,payment){ 
-    payment = parseInt(payment);
-    if(role=='M') this.setState({view: 'ReportPaymentManufacturer',payment}) 
-    else this.setState({view: 'ReportPaymentRetailer',payment}) 
-}
-reportTransfer(role,payment){ 
-  payment = parseInt(payment);
-  if(role=='M') this.setState({view: 'ReportTransferManufacturer',payment}) 
-  else this.setState({view: 'ReportTransferRetailer',payment}) 
-}
+    }
+
+    reportTransfer(role,payment){ 
+      payment = parseInt(payment);
+      if(role=='M') this.setState({view: 'ReportTransferManufacturer',payment}) 
+      else this.setState({view: 'ReportTransferRetailer',payment}) 
+    }
 
   }
 
