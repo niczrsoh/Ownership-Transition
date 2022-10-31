@@ -10,7 +10,6 @@ const manufacturerInteract = {
   reportName: Bytes(128),
   reportPrice: UInt,
   reportID: UInt,
-  reportItemContract: Fun([Bytes(128),Bytes(128),UInt],Null),
   reportShipping: Fun([Bytes(128)],Bytes(256))
 };
 const retailerInteract = {
@@ -29,7 +28,6 @@ export const main = Reach.App(() => {
     const iname=declassify(interact.reportName);
     const iprice=declassify(interact.reportPrice);
     const id=declassify(interact.reportID);
-     //interact.reportItemContract(mName,iname,iprice);
   })
   manufacturer.publish(mName,iname,iprice, id);
   commit();
