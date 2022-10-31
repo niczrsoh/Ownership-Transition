@@ -28,32 +28,6 @@ exports.ConnectAccount = class extends React.Component {
   }
 }
 
-exports.FundAccount = class extends React.Component {
-  render() {
-    const {bal, standardUnit, defaultFundAmt, parent} = this.props;
-    const amt = (this.state || {}).amt || defaultFundAmt;
-    return (
-      <div>
-        <h2>Fund account</h2>
-        <br />
-        Balance: {bal} {standardUnit}
-        <hr />
-        Would you like to fund your account with additional {standardUnit}?
-        <br />
-        (This only works on certain devnets)
-        <br />
-        <input
-          type='number'
-          placeholder={defaultFundAmt}
-          onChange={(e) => this.setState({amt: e.currentTarget.value})}
-        />
-        <button onClick={() => parent.fundAccount(amt)}>Fund Account</button>
-        <button onClick={() => parent.skipFundAccount()}>Skip</button>
-      </div>
-    );
-  }
-}
-
 exports.DeployerOrAttacher = class extends React.Component {
   render() {
     const {parent} = this.props;
