@@ -23,7 +23,7 @@ exports.Login = class extends React.Component {
     const {parent} = this.props;
     return (
       <div className='login'>
-        <h2>Login as manufacturer</h2>
+        <h2>Login as deployer</h2>
         
         Enter your username and password
         <hr />
@@ -50,7 +50,7 @@ exports.LoginFail = class extends React.Component {
     return(
       <div className="app">
       <div className="login-form">
-        <div className="title">Login as manufacturer</div>
+        <div className="title">Login as deployer</div>
         <div>User fails to log in</div>
       </div>
     </div>

@@ -28,15 +28,16 @@ class App extends React.Component{
         if(await reach.canFundFromFaucet()){
             this.setState({view:'FundAccount'});
         }else{
-            this.setState({view:'DeployerOrAttacher'});
+            this.setState({view:'ThreeUsers'});
         }
     }
     async fundAccount(fundAmount) {
         await reach.fundFromFaucet(this.state.acc, reach.parseCurrency(fundAmount));
-        this.setState({view: 'DeployerOrAttacher'});
+        this.setState({view: 'ThreeUsers'});
       }
       render(){return renderView(this, AppViews)}
-      async skipFundAccount() { this.setState({view: 'DeployerOrAttacher'}); }
+      async skipFundAccount() { this.setState({view: 'ThreeUsers'}); }
+      DeployerOrAttacher() { this.setState({view: 'DeployerOrAttacher'}); }
       selectAttacher() { this.setState({view: 'Wrapper', ContentView: Attacher}); }
       selectDeployer() { this.setState({view: 'Wrapper', ContentView: Deployer}); }
 }

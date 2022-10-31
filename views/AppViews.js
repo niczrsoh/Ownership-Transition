@@ -38,14 +38,49 @@ exports.DeployerOrAttacher = class extends React.Component {
         <p>
           <button
             onClick={() => parent.selectDeployer()}
-          >Manufacturer</button>
-          <br /> Create an item, deploy the contract.
+          >Deployer</button>
+          <br /> Create an item, deploy the contract.<br></br>
+          Sell it to the BUYER.<br></br>
         </p>
         <p>
           <button
             onClick={() => parent.selectAttacher()}
+          >Attacher</button>
+          <br /> Attach to the Manufacturer's contract.<br></br>
+          Buy item from the MANUFACTURER.<br></br>
+        </p>
+      </div>
+    );
+  }
+}
+
+exports.ThreeUsers = class extends React.Component {
+  render() {
+    const {parent} = this.props;
+    return (
+      <div>
+        Please select a role:
+        <br />
+        <p>
+          <button
+            onClick={() => parent.selectDeployer()}
+          >Manufacturer</button>
+          <br /> Create an item, deploy the contract.<br></br>
+          Sell it to the RETAILER.<br></br>
+        </p>
+        <p>
+          <button
+            onClick={() => parent.DeployerOrAttacher()}
           >Retailer</button>
-          <br /> Attach to the Manufacturer's contract.
+          <br /> Attach to the Manufacturer's contract.<br></br>
+          or<br></br>
+          Create an item, deploy the contract.
+        </p>
+        <p>
+          <button
+            onClick={() => parent.selectAttacher()}
+          >Buyer</button>
+          <br /> Attach to the Retailer's contract.
         </p>
       </div>
     );
