@@ -1,52 +1,54 @@
 'reach 0.1';
 const commonInteract = {
   reportReject: Fun([Bytes(1)], Null),
-  reportTransfer: Fun([Bytes(1),UInt], Null)
+  reportTransfer: Fun([Bytes(1),UInt,Bytes(128),Bytes(128)], Null),
+  reportRole: Bytes(128),
 };
-const manufacturerInteract = {
+const deployerInteract = {
   ...commonInteract,
   reportUser: Bytes(128),//zr
   reportName: Bytes(128),
   reportPrice: UInt,
   reportID: UInt,
-  reportShipping: Fun([Bytes(128)],Bytes(256))
 };
-const retailerInteract = {
+const attacherInteract = {
   ...commonInteract,
   reportUser: Bytes(128),//zr
-  reportOwner: Fun([Bytes(128)], Null),
+  reportPayment: Fun([Bytes(128),UInt], Null),
   confirmPurchase: Fun([Bytes(128),UInt], Bool)
 };
 export const main = Reach.App(() => {
-  const manufacturer = Participant('manufacturer', manufacturerInteract);
-  const retailer = Participant('retailer', retailerInteract);
+  const deployer = Participant('deployer', deployerInteract);
+  const attacher = Participant('attacher', attacherInteract);
   init();
-  
-  manufacturer.only(()=>{
+
+  deployer.only(()=>{
     const mName  = declassify(interact.reportUser);
     const iname=declassify(interact.reportName);
     const iprice=declassify(interact.reportPrice);
     const id=declassify(interact.reportID);
   })
-  manufacturer.publish(mName,iname,iprice, id);
+  deployer.publish(mName,iname,iprice, id);
   commit();
   
-  retailer.only(() => { 
+  attacher.only(() => { 
     const rName = declassify(interact.reportUser);
     const willBuy = declassify(interact.confirmPurchase(iname,iprice)); });
-  retailer.publish(rName,willBuy);
+ 
+  attacher.publish(rName,willBuy);
 
   if (!willBuy) {
     commit();
-    manufacturer.interact.reportReject('M');
-    retailer.interact.reportReject('R');
+    deployer.interact.reportReject('M');
+    attacher.interact.reportReject('R');
     exit();
   } 
+
   commit();
-  retailer.pay(iprice);
-  transfer(iprice).to(manufacturer);
-  manufacturer.interact.reportTransfer('M',iprice);
-  retailer.interact.reportTransfer('R',iprice);
+  attacher.pay(iprice);
+  deployer.interact.reportTransfer('M',iprice,rName,iname);
+  transfer(iprice).to(deployer);
+  attacher.interact.reportTransfer('R',iprice,mName,iname);
   commit();
 
   exit();

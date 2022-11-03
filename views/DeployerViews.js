@@ -7,10 +7,10 @@ const sleep = (milliseconds) => new Promise(resolve => setTimeout(resolve, milli
 
 exports.Wrapper = class extends React.Component {
   render() {
-    const {content} = this.props;
+    const {content,role} = this.props;
     return (
       <div className="Deployer">
-        <h2>Deployer (Alice)</h2>
+        <h2>Deployer {role}</h2>
         {content}
       </div>
     );
@@ -47,14 +47,13 @@ exports.Login = class extends React.Component {
 }
 exports.LoginFail = class extends React.Component {
   render(){
-    const {parent,who} = this.props;
+    const {parent} = this.props;
     return(
       <div className="app">
       <div className="login-form">
-        <div className="title">Login as {who}</div>
         <div>User fails to log in</div>
         <button
-          onClick={() => parent.class}
+          onClick={() => parent.login()}
         >Login Again</button>
       </div>
     </div>
@@ -68,6 +67,7 @@ exports.reportName = class extends React.Component {
     const name = (this.state || {}).name;
     return (
       <div>
+        <h3>Create an item</h3>
         <div class="group">
         <input
           type='text'
@@ -76,7 +76,8 @@ exports.reportName = class extends React.Component {
         /> 
         <span class="highlight"></span>
       <span class="bar"></span>
-        <label>Item Name:</label>
+        <label>  
+        Item Name:</label>
         </div>
         <button
           onClick={() => parent.reportName(name)}
@@ -149,11 +150,11 @@ exports.WaitingForAttacher = class extends React.Component {
   }
 
   render() {
-    const {ctcInfoStr} = this.props;
+    const {ctcInfoStr,user} = this.props;
     return (
       <div>
         Waiting for Attacher to join...
-        <br /> Please give them this contract info:
+        <br /> {user}, please give them your contract info:
         <pre className='ContractInfo'>
           {ctcInfoStr}
         </pre>

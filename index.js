@@ -17,7 +17,7 @@ const defaults = {defaultFundAmt: '10', defaultPrice: '1', standardUnit};
 class App extends React.Component{
     constructor(props){
         super(props);
-        this.state={view: 'ConnectAccount', ...defaults};
+        this.state={view: 'ConnectAccount', ...defaults, role:""};
     }
   
     async componentDidMount(){
@@ -37,22 +37,26 @@ class App extends React.Component{
       }
       render(){return renderView(this, AppViews)}
       async skipFundAccount() { this.setState({view: 'ThreeUsers'}); }
-      DeployerOrAttacher() { this.setState({view: 'DeployerOrAttacher'}); }
-      selectAttacher() { this.setState({view: 'Wrapper', ContentView: Attacher}); }
-      selectDeployer() { this.setState({view: 'Wrapper', ContentView: Deployer}); }
+      DeployerOrAttacher(role) { 
+        this.setState({view: 'DeployerOrAttacher', role}); }
+      selectAttacher(role) { this.setState({view: 'Wrapper', ContentView: Attacher,role}); }
+      selectDeployer(role) { 
+        this.setState({view: 'Wrapper',ContentView: Deployer, role}); }
 }
 
 class Owner extends React.Component {
 
     reportReject(role){ 
-      if(role=='M') this.setState({view: 'ReportRejectManufacturer'}) 
-      else this.setState({view: 'ReportRejectRetailer'}) 
+      if(role=='M') this.setState({view: 'ReportRejectDeployer'}) 
+      else this.setState({view: 'ReportRejectAttacher'}) 
     }
 
-    reportTransfer(role,payment){ 
+    reportTransfer(role,payment,user,item){ 
       payment = parseInt(payment);
-      if(role=='M') this.setState({view: 'ReportTransferManufacturer',payment}) 
-      else this.setState({view: 'ReportTransferRetailer',payment}) 
+      item = item.replace(/[^a-zA-Z ]/g, "");
+      user = user.replace(/[^a-zA-Z ]/g, "");
+      if(role=='M') this.setState({view: 'ReportTransferDeployer',payment,user,item}) 
+      else this.setState({view: 'ReportTransferAttacher',payment,user,item}) 
     }
 
   }
@@ -66,16 +70,19 @@ class Owner extends React.Component {
       const id = Math.floor(Math.random() * (max - min + 1) ) + min;
       console.log(id);
       this.reportID = id;
-      this.state = {view:'Login', price: 0, name: "", user: "", id, ctcInfoStr: ""}
+      this.state = {view:'Login',price: 0, name: "", user: "", id, ctcInfoStr: ""}
   }
+    login(){
+      this.setState({view:'Login'});
+    }
     reportUser(user,uPw){
       console.log("username: "+user+"password: "+uPw)
         if(user=='alice'&&uPw=='1234'){
           console.log(`Successfully login...`)
-          this.setState({view:"reportName"})
+          this.setState({view:"reportName", user})
         }else{
           console.log(`Unsuccessfully login...`)
-          this.setState({view: 'LoginFail', who: 'manufacturer'})
+          this.setState({view: 'LoginFail',user})
         }
     }  
   reportName(name){this.setState({view: 'reportPrice', name});}
@@ -86,10 +93,11 @@ class Owner extends React.Component {
       this.reportUser = this.state.user;
       this.reportName = this.state.name;
       this.reportPrice = this.state.price;
+      console.log(this.state.user);
       this.deadline={ETH: 10, ALGO: 100, CFX: 1000}[reach.connector];
-      backend.manufacturer(ctc, this);
+      backend.deployer(ctc, this);
   const ctcInfoStr = JSON.stringify(await ctc.getInfo(), null, 2);
-  this.setState({view: 'WaitingForAttacher', ctcInfoStr});
+  this.setState({view: 'WaitingForAttacher', ctcInfoStr,user: this.state.user});
 }
 render() { return renderView(this, DeployerViews); }
   }
@@ -100,14 +108,17 @@ render() { return renderView(this, DeployerViews); }
       super(props);
       this.state = {view: "Login",user: "",iname: "", iprice:0, answer: false};
     }
+    login(){
+      this.setState({view:'Login'});
+    }
     reportUser(user,uPw){
       console.log("username: "+user+"password: "+uPw)
         if(user=='bob'&&uPw=='1234'){
           console.log(`Successfully login...`)
-          this.setState({view:"Attach"})
+          this.setState({view:"Attach",user})
         }else{
           console.log(`Unsuccessfully login...`)
-          this.setState({view: 'LoginFail', who: 'retailer'})
+          this.setState({view: 'LoginFail',user})
         }
     }  
     
@@ -115,7 +126,7 @@ render() { return renderView(this, DeployerViews); }
       this.reportUser = this.state.user;
       const ctc = this.props.acc.contract(backend, JSON.parse(ctcInfoStr));
       this.setState({view: 'Attaching',ctc});
-      backend.retailer(ctc, this);
+      backend.attacher(ctc, this);
     }
 
     async confirmPurchase(name,price){
@@ -128,11 +139,12 @@ render() { return renderView(this, DeployerViews); }
 
     confirmPurchase2(answer){
       this.state.resolveAcceptedP(answer);
-      this.setState({view:'reportOwner'})
+      this.setState({view:'reportPayment'})
     }
 
-    reportOwner(name){
-          this.setState({view: 'reportOwner',name});
+    reportPayment(name,price){
+          price = parseInt(price);
+          this.setState({view: 'reportPayment',name, price});
       };
       render(){return renderView(this, AttacherViews);}
   }

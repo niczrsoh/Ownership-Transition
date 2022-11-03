@@ -2,43 +2,44 @@ import React from 'react';
 
 const exports = {};
 
-exports.ReportRejectManufacturer = class extends React.Component {
+exports.ReportRejectDeployer = class extends React.Component {
   render() {
     return (
       <div>
-        The attacher reject the item
+        The attacher reject the item 
       </div>
     );
   }
 }
-exports.ReportRejectRetailer = class extends React.Component {
+exports.ReportRejectAttacher = class extends React.Component {
   render() {
     return (
       <div>
-       You reject the item
+       You reject the item 
       </div>
     );
   }
 }
-exports.ReportTransferManufacturer = class extends React.Component {
+exports.ReportTransferDeployer = class extends React.Component {
   render() {
-    const {payment} = this.props;
+    const {payment,user,item} = this.props;
     return (
       <div>
-       Retailer paid {payment} Algo to the contract <br/><br/>
+       {user.replace(' ','')} bought {item} <br/><br/> 
+       {user} paid {payment} Algo to the contract <br/><br/>
        The contract paid {payment} Algo to you <br/><br/>
-       Now Retailer own the item
+       Now {user} own the item
       </div>
     );
   }
 }
-exports.ReportTransferRetailer = class extends React.Component {
+exports.ReportTransferAttacher = class extends React.Component {
   render() {
-    const {payment} = this.props;
+    const {payment,user,item} = this.props;
     return (
       <div>
        You paid {payment} Algo to the contract <br/><br/>
-       Now you own the item
+       Now you own {item} from {user}
       </div>
     );
   }

@@ -5,10 +5,10 @@ const exports = {...OwnershipView};
 
 exports.Wrapper = class extends React.Component {
   render() {
-    const {content} = this.props;
+    const {content,role} = this.props;
     return (
       <div className="Attacher">
-        <h2>Attacher (Bob)</h2>
+        <h2>Attacher {role}</h2>
         {content}
       </div>
     );
@@ -44,12 +44,14 @@ exports.Login = class extends React.Component {
 }
 exports.LoginFail = class extends React.Component {
   render(){
-    const {parent,who} = this.props;
+    const {parent} = this.props;
     return(
       <div className="app">
-      <div className="login-form">
-        <div className="title">Login as {who}</div>
+          <div className="login-form">
         <div>User fails to log in</div>
+        <button
+          onClick={() => parent.login()}
+        >Login Again</button>
       </div>
     </div>
     )
@@ -138,13 +140,13 @@ exports.ConfirmPurchase = class extends React.Component {
 }
 
 
-exports.reportOwner = class extends React.Component {
+exports.reportPayment = class extends React.Component {
     render() {
-      const {name} = this.props;
+      const {name,price} = this.props;
       const {disabled} = this.state || {};
       return (
         <div>
-         Now Bob owns <h4 id='itemname'>{name}!</h4>
+         Now you will pay {price} Algo for <h4 id='itemname'>{name}!</h4>
           <br />
         </div>
       );
