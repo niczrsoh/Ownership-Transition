@@ -20,11 +20,10 @@ exports.Login = class extends React.Component {
   render() {
     const uName = (this.state || {}).uName;
     const password = (this.state || {}).password;
-    const {parent} = this.props;
+    const {parent,role} = this.props;
     return (
       <div className='login'>
-        <h2>Login as deployer</h2>
-        
+        <h2>Login as {role}</h2>
         Enter your username and password
         <hr />
         <br></br>

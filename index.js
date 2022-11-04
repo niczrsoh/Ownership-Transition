@@ -70,19 +70,28 @@ class Owner extends React.Component {
       const id = Math.floor(Math.random() * (max - min + 1) ) + min;
       console.log(id);
       this.reportID = id;
-      this.state = {view:'Login',price: 0, name: "", user: "", id, ctcInfoStr: ""}
+      this.state = {view:'Login',role:this.props.role, price: 0, name: "", user: "", id, ctcInfoStr: ""}
   }
     login(){
       this.setState({view:'Login'});
     }
     reportUser(user,uPw){
       console.log("username: "+user+"password: "+uPw)
-        if(user=='alice'&&uPw=='1234'){
+      if(this.props.role=='manufacturer'){
+        if(user=='alice'&&uPw=='a1234'){
           console.log(`Successfully login...`)
           this.setState({view:"reportName", user})
         }else{
           console.log(`Unsuccessfully login...`)
           this.setState({view: 'LoginFail',user})
+        }}else{
+          if(user=='bob'&&uPw=='b2345'){
+            console.log(`Successfully login...`)
+            this.setState({view:"reportName", user})
+          }else{
+            console.log(`Unsuccessfully login...`)
+            this.setState({view: 'LoginFail',user})
+          }
         }
     }  
   reportName(name){this.setState({view: 'reportPrice', name});}
@@ -106,19 +115,28 @@ render() { return renderView(this, DeployerViews); }
     //edit and change the retailer functions here!!
     constructor(props) {
       super(props);
-      this.state = {view: "Login",user: "",iname: "", iprice:0, answer: false};
+      this.state = {view: "Login",role: this.props.role, user: "",iname: "", iprice:0, answer: false};
     }
     login(){
       this.setState({view:'Login'});
     }
     reportUser(user,uPw){
       console.log("username: "+user+"password: "+uPw)
-        if(user=='bob'&&uPw=='1234'){
+      if(this.props.role=='retailer'){
+        if(user=='bob'&&uPw=='b2345'){
           console.log(`Successfully login...`)
-          this.setState({view:"Attach",user})
+          this.setState({view:"Attach", user})
         }else{
           console.log(`Unsuccessfully login...`)
           this.setState({view: 'LoginFail',user})
+        }}else{
+          if(user=='clarke'&&uPw=='c4248'){
+            console.log(`Successfully login...`)
+            this.setState({view:"Attach", user})
+          }else{
+            console.log(`Unsuccessfully login...`)
+            this.setState({view: 'LoginFail',user})
+          }
         }
     }  
     
