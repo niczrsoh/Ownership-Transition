@@ -81,6 +81,7 @@ animation: animate 4s ease-in-out infinite;
 
 /* form starting stylings ------------------------------- */
 .group 			  { 
+text-align:center;
 position:relative; 
 margin-bottom:45px; 
 }

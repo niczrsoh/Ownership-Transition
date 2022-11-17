@@ -9,6 +9,7 @@ const deployerInteract = {
   reportUser: Bytes(128),//zr
   reportName: Bytes(128),
   reportPrice: UInt,
+  reportDetails: Bytes(128),
   reportID: UInt,
 };
 const attacherInteract = {
@@ -26,9 +27,10 @@ export const main = Reach.App(() => {
     const mName  = declassify(interact.reportUser);
     const iname=declassify(interact.reportName);
     const iprice=declassify(interact.reportPrice);
+    const idetails =declassify(interact.reportDetails);
     const id=declassify(interact.reportID);
   })
-  deployer.publish(mName,iname,iprice, id);
+  deployer.publish(mName,iname,iprice,idetails, id);
   commit();
   
   attacher.only(() => { 

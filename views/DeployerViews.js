@@ -85,14 +85,19 @@ exports.reportName = class extends React.Component {
     );
   }
 }
-
+function calculation(a,b){
+  console.log(a+b);
+  return (a+b).toFixed(4);
+}
 exports.reportPrice = class extends React.Component {
   render() {
-    const {parent, defaultPrice, standardUnit} = this.props;
+    const {parent, balance,name, defaultPrice, standardUnit} = this.props;
     const price = (this.state || {}).price || defaultPrice;
+    const bal = calculation(Number(price), Number(balance)) || balance; 
     return (
       <div>
-        <div class="group">
+        <h3>Enter your {name} price</h3>
+        <div class="group" >
           <br></br>
         <input
           type='number'
@@ -103,22 +108,89 @@ exports.reportPrice = class extends React.Component {
       <span class="bar"></span>
       <label><font size="+1">Price: <strong>({standardUnit})</strong></font></label>
         </div>
+        <div class="group">
+          <br></br><br></br>
+        Balance: <strong>{balance} ALGO</strong><br/>
+        Balance (item was sold):<br></br> <strong>{bal} ALGO</strong>
+        <span class="highlight"></span>
+      <span class="bar"></span>
+      <label><font size="+1">Financial Preview: <strong>({standardUnit})</strong></font></label>
+        </div>
         <button
           onClick={() => parent.reportPrice(price)}
         >Confirm</button>
       </div>
     );
   }
-}
 
+}
+exports.reportDetails = class extends React.Component {
+  render() {
+    const {parent,name} = this.props;
+    const product = (this.state || {}).product;
+    const origin = (this.state || {}).origin;
+    const phone = (this.state || {}).phone; 
+    const details = product+"&&&&&"+origin+"{}{}{}"+phone;
+    return (
+      <div>
+        <h3>State {name} details and origin</h3>
+        {/*Details*/}
+        <div class="group">
+        <br></br>
+        <textarea
+          name="itemDetail" rows="4" cols="50"
+          placeholder='Details out the item'
+          onChange={(e) => this.setState({product: e.currentTarget.value})}
+        /> 
+        <span class="highlight"></span>
+      <span class="bar"></span>
+        <label>  
+        {name} Details: </label>
+        </div>
+        {/*Origin*/}
+        <div class="group">
+        <input
+          type='text'
+          placeholder='Details out the origin of your item'
+          onChange={(e) => this.setState({origin: e.currentTarget.value})}
+        /> 
+        <span class="highlight"></span>
+      <span class="bar"></span>
+        <label>  
+        {name} Origin:</label>
+        </div>
+     {/*Phone Number*/}
+        <div class="group">
+        <br></br>
+        <input type="tel" id="phone" name="phone" placeholder="010-1234567" pattern="[0-9]{3}-[0-9]{7}" 
+         onChange={(e) => this.setState({phone: e.currentTarget.value})}
+        required/>
+  <small>Format: 012-1234567</small>
+        <span class="highlight"></span>
+      <span class="bar"></span>
+        <label>  
+         Phone number: </label>
+        </div>
+        <button
+          onClick={() => parent.reportDetails(details)}
+        >Confirm</button>
+      </div>
+    );
+  }
+}
 exports.Deploy = class extends React.Component {
   render() {
-    const {parent, name, price, id, standardUnit} = this.props;
+    const {parent, name, price, id,details, standardUnit} = this.props;
+    var words = details.split("&&&&&");
+    var words2 = words[1].split("{}{}{}");
     return (
       <div>
         Item ID: <strong> {id} </strong> <br></br>
         Item name: <strong>{name}</strong> <br></br>
-        Price (pay to deploy): <strong>{price}</strong> {standardUnit}
+        Price (pay to deploy): <strong>{price}</strong> {standardUnit} <br></br>
+        Item detail: <strong>{words[0]}</strong> <br></br>
+        Item origin: <strong>{words2[0]}</strong> <br></br>
+        Phone Number: <strong>{words2[1]}</strong> <br></br>
         <br /><br></br>
         <button
           onClick={() => parent.deploy()}

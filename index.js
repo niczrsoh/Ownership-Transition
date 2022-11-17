@@ -70,7 +70,8 @@ class Owner extends React.Component {
       const id = Math.floor(Math.random() * (max - min + 1) ) + min;
       console.log(id);
       this.reportID = id;
-      this.state = {view:'Login',role:this.props.role, price: 0, name: "", user: "", id, ctcInfoStr: ""}
+      this.state = {view:'Login',role:this.props.role, balance: this.props.bal, phone: "",
+       price: this.props.defaultPrice, name: "", details:"", user: "", id, ctcInfoStr: ""}
   }
     login(){
       this.setState({view:'Login'});
@@ -95,14 +96,19 @@ class Owner extends React.Component {
         }
     }  
   reportName(name){this.setState({view: 'reportPrice', name});}
-  reportPrice(price){this.setState({view: 'Deploy', price});}
+  reportPrice(price,balance,name){this.setState({view: 'reportDetails', price});}
+  reportDetails(details,name){this.setState({view: 'Deploy', details});}
   async deploy(){
       const ctc=this.props.acc.contract(backend);
       this.setState({view: 'Deploying', ctc});
       this.reportUser = this.state.user;
       this.reportName = this.state.name;
       this.reportPrice = this.state.price;
+      //inside the details have the product detail, origin and deployer phone number
+      //details=detail&&&&&origin{}{}{}phone
+      this.reportDetails = this.state.details;
       console.log(this.state.user);
+      console.log(this.state.details);
       this.deadline={ETH: 10, ALGO: 100, CFX: 1000}[reach.connector];
       backend.deployer(ctc, this);
   const ctcInfoStr = JSON.stringify(await ctc.getInfo(), null, 2);
