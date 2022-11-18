@@ -16,7 +16,7 @@ const attacherInteract = {
   ...commonInteract,
   reportUser: Bytes(128),//zr
   reportPayment: Fun([Bytes(128),UInt], Null),
-  confirmPurchase: Fun([Bytes(128),UInt], Bool)
+  confirmPurchase: Fun([Bytes(128),UInt,Bytes(128),UInt], Bool),
 };
 export const main = Reach.App(() => {
   const deployer = Participant('deployer', deployerInteract);
@@ -35,8 +35,9 @@ export const main = Reach.App(() => {
   
   attacher.only(() => { 
     const rName = declassify(interact.reportUser);
-    const willBuy = declassify(interact.confirmPurchase(iname,iprice)); });
- 
+    const willBuy = declassify(interact.confirmPurchase(iname,iprice,idetails,id)); 
+  });
+    
   attacher.publish(rName,willBuy);
 
   if (!willBuy) {

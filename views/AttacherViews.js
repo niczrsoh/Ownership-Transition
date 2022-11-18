@@ -113,11 +113,47 @@ exports.AcceptTerms = class extends React.Component {
 
 exports.ConfirmPurchase = class extends React.Component {
   render() {
-    const {name, price, standardUnit,parent} = this.props;
+    const {name, price, standardUnit,detail,id,parent} = this.props;
     const {disabled} = this.state || {};
     return (
       <div>
-        Do you want to purchase <h4 id='itemname'>{name}</h4> for {price}{standardUnit}?
+        This is the purchasement of <h4 id='itemname'>{name}</h4> with the price {price}{standardUnit}
+        <br />
+        <button
+        disabled={disabled}
+          onClick={() => {
+            this.setState({disabled: true});
+            parent.seeDetails(true,name, price, detail,id);
+          }}
+        >Click to see product details</button>
+      <br />
+      <button
+      onClick={() => {
+        this.setState({disabled: true});
+        parent.reportReject();
+      } }
+    >I dont want this item</button>
+    <br />
+    </div>
+    );
+  }
+}
+
+exports.seeDetails = class extends React.Component {
+  render() {
+    const {name, price, detail, standardUnit,parent} = this.props;
+    const {disabled} = this.state || {};
+    var words = detail.split("&&&&&");
+    var words2 = words[1].split("{}{}{}");
+    var words3 = words2[1].toString().replace(/[^a-z^A-Z^0-9\- ]/g,"");
+    var tname = name.replace(/[^a-z^A-Z^0-9 ]/g,"");
+    return (
+      <div>
+        Item name: <strong>{tname}</strong> <br></br>
+        Price (pay to deploy): <strong>{price}</strong> {standardUnit} <br></br>
+        Item detail: <strong>{words[0]}</strong> <br></br>
+        Item origin: <strong>{words2[0]}</strong> <br></br>
+        Phone Number: <strong>{words3}</strong> <br></br>
         <br />
         <button
         disabled={disabled}

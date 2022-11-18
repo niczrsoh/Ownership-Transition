@@ -153,12 +153,16 @@ render() { return renderView(this, DeployerViews); }
       backend.attacher(ctc, this);
     }
 
-    async confirmPurchase(name,price){
+    async confirmPurchase(name,price,detail,id){
       price = parseInt(price);
       console.log(name+" "+price);
       return await new Promise(resolveAcceptedP => {
-          this.setState({view: 'ConfirmPurchase', name, price, resolveAcceptedP});
+          this.setState({view: 'ConfirmPurchase', name, price, detail,id,resolveAcceptedP});
       });
+    }
+
+    seeDetails(answer,name,price,detail,id){
+      this.setState({view:'seeDetails',name, price,detail,id})
     }
 
     confirmPurchase2(answer){
