@@ -161,11 +161,10 @@ exports.reportDetails = class extends React.Component {
         </div>
      {/*Phone Number*/}
         <div class="group">
-        <br></br>
+          <br></br>
         <input type="tel" id="phone" name="phone" placeholder="010-1234567" pattern="[0-9]{3}-[0-9]{7}" 
          onChange={(e) => this.setState({phone: e.currentTarget.value})}
         required/>
-  <small>Format: 012-1234567</small>
         <span class="highlight"></span>
       <span class="bar"></span>
         <label>  
