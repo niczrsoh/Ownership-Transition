@@ -6,14 +6,17 @@ exports.Wrapper = class extends React.Component {
   render() {
     const {content} = this.props;
     return (
+      <div className='dashboard'>
+        <div className='logo'>
+          <br></br>Get linked up&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br></br><br></br><br></br>
+        </div>
       <div className="App">
         <header className="App-header" id="root">
-          <h1>Ownership Transition</h1>
           <h1>Ownership Transition</h1>
           <br></br>
           {content}
         </header>
-      </div>
+      </div></div>
     );
   }
 }
@@ -21,8 +24,7 @@ exports.ConnectAccount = class extends React.Component {
   render() {
     return (
       <div>
-        Please wait while we connect to your account.
-        If this takes more than a few seconds, there may be something wrong.
+        Be patient while connecting to your account...
       </div>
     )
   }
