@@ -22,6 +22,7 @@ code {
   text-align: right;
   font-size: 20px;
   color: rgb(56, 48, 28);
+  font-family: Georgia, serif;
 }
 
 .dashboard{
@@ -174,8 +175,7 @@ button {
   margin:0 0.3em 0.3em 0;
   box-sizing: border-box;
   text-decoration:none;
-  text-transform:uppercase;
-  font-family: monaco, Consolas, "Lucida Console", monospace;
+  font-family: Arial, sans-serif;
   font-weight:400;
   color:#000000;
   text-align:center;
@@ -214,9 +214,13 @@ textarea {
 }
 
 div{
-  font-family: Copperplate, "Copperplate Gothic Light", fantasy;
+  font-family: Arial, sans-serif;
 }
 
 #itemname{
   font-family: "Poppins", sans-serif;
+}
+
+b{
+  color: #1199FA;
 }

@@ -24,7 +24,6 @@ exports.Login = class extends React.Component {
     return (
       <div className='login'>
         <h2>Login as {role}</h2>
-        Enter your username and password
         <hr />
         <br></br>
         <div class="group">
