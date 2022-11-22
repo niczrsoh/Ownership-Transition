@@ -28,7 +28,7 @@ exports.Login = class extends React.Component {
         <hr />
         <br></br>
         <div class="group">
-        <input type='text' id='uName' value={uName}  onChange={(e) => this.setState({uName: e.currentTarget.value})}   required/>
+        <input type='text' col="18" id='uName' value={uName}  onChange={(e) => this.setState({uName: e.currentTarget.value})}   required/>
         <span class="highlight"></span>
         <span class="bar"></span>
         <label>Username: &nbsp;</label>
