@@ -35,8 +35,8 @@ exports.DeployerOrAttacher = class extends React.Component {
     const {parent,role} = this.props;
     return (
       <div>
-        Login as {role} <br/><br/>
-        Please select a role:
+        Login as <b>{role}</b> <br/><br/>
+        Please select a <b>role</b>:
         <br />
         <p>
           <button

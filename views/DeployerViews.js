@@ -10,7 +10,7 @@ exports.Wrapper = class extends React.Component {
     const {content,role} = this.props;
     return (
       <div className="Deployer">
-        <h2>Deployer {role}</h2>
+        <h2><b>Deployer {role}</b></h2>
         {content}
       </div>
     );
@@ -23,7 +23,7 @@ exports.Login = class extends React.Component {
     const {parent,role} = this.props;
     return (
       <div className='login'>
-        <h2>Login as {role}</h2>
+        <h2>Login as <b>{role}</b></h2>
         <hr />
         <br></br>
         <div class="group">
@@ -65,7 +65,7 @@ exports.reportName = class extends React.Component {
     const name = (this.state || {}).name;
     return (
       <div>
-        <h3>Create an item</h3>
+        <h4>Create an item</h4>
         <div class="group">
         <input
           type='text'
@@ -95,7 +95,7 @@ exports.reportPrice = class extends React.Component {
     const bal = calculation(Number(price), Number(balance)) || balance; 
     return (
       <div>
-        <h3>Enter your {name} price</h3>
+        <h4>Enter your {name} price</h4>
         <div class="group" >
           <br></br>
         <input
@@ -109,11 +109,16 @@ exports.reportPrice = class extends React.Component {
         </div>
         <div class="group">
           <br></br><br></br>
-        Balance: <strong>{balance} ALGO</strong><br/>
-        Balance (item was sold):<br></br> <strong>{bal} ALGO</strong>
+        <table class='financial'>
+          <tr>
+        <th>Balance <b>now</b>: </th><td><b>{balance}</b> &nbsp;ALGO</td></tr><br/>
+        <tr>
+        <th>Balance <b>after</b> item was sold:</th><br></br> <tr><b>{bal}</b> &nbsp;ALGO</tr>
+        </tr>
         <span class="highlight"></span>
       <span class="bar"></span>
       <label><font size="+1">Financial Preview: <strong>({standardUnit})</strong></font></label>
+      </table>
         </div>
         <button
           onClick={() => parent.reportPrice(price)}
@@ -143,7 +148,7 @@ exports.reportDetails = class extends React.Component {
         /> 
         <span class="highlight"></span>
       <span class="bar"></span>
-        <label>  
+        <label className='details'>  
         {name} details: </label>
         </div>
         {/*Origin*/}
@@ -156,7 +161,7 @@ exports.reportDetails = class extends React.Component {
         /> 
         <span class="highlight"></span>
       <span class="bar"></span><br/>
-        <label>  
+        <label className='details'>  
         {name} origin:</label>
         </div>
      {/*Phone Number*/}
@@ -167,7 +172,7 @@ exports.reportDetails = class extends React.Component {
         />
         <span class="highlight"></span>
       <span class="bar"></span><br/>
-        <label>  
+        <label className='details'>  
          Phone number: </label>
         </div>
         <button
@@ -184,12 +189,21 @@ exports.Deploy = class extends React.Component {
     var words2 = words[1].split("{}{}{}");
     return (
       <div>
-        Item ID: <strong> {id} </strong> <br></br>
-        Item name: <strong>{name}</strong> <br></br>
-        Price (pay to deploy): <strong>{price}</strong> {standardUnit} <br></br>
-        Item detail: <strong>{words[0]}</strong> <br></br>
-        Item origin: <strong>{words2[0]}</strong> <br></br>
-        Phone Number: <strong>{words2[1]}</strong> <br></br>
+        <table>
+          <tr>
+        <th>Item ID: </th> <td><b> {id} </b></td> <br></br>
+        </tr>
+        <tr>
+        <th>Item name: </th><td><b>{name}</b></td> <br></br>
+        </tr><tr>
+        <th>Price (pay to deploy): </th><td><b>{price}</b> {standardUnit} </td><br></br>
+        </tr><tr>
+        <th>Item detail: </th><td><b>{words[0]}</b></td> <br></br>
+        </tr><tr>
+        <th>Item origin: </th><td><b>{words2[0]}</b></td> <br></br>
+        </tr><tr>
+        <th>Phone Number: </th><td><b>{words2[1]}</b></td> <br></br>
+        </tr></table>
         <br /><br></br>
         <button
           onClick={() => parent.deploy()}
@@ -223,8 +237,10 @@ exports.WaitingForAttacher = class extends React.Component {
     const {ctcInfoStr,user} = this.props;
     return (
       <div>
+        <p class='left'>
         Waiting for Attacher to join...
         <br /> {user}, please give them your contract info:
+        </p>
         <pre className='ContractInfo'>
           {ctcInfoStr}
         </pre>

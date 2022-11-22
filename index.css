@@ -76,16 +76,17 @@ h1{
 text-align:center;
 position:relative; 
 margin-bottom:45px; 
+font-family: Arial, sans-serif;
 }
 
 input 				{
 font-size:18px;
 padding:10px 10px 10px 5px;
 display:block;
-width:500px;
+width:330px;
 border:none;
 border-bottom:1px solid #757575;
-font-family: monaco, Consolas, "Lucida Console", monospace;
+font-family: Arial, sans-serif;
 }
 input:focus 		{ outline:none; }
 
@@ -101,7 +102,29 @@ top:10px;
 transition:0.2s ease all; 
 -moz-transition:0.2s ease all; 
 -webkit-transition:0.2s ease all;
+font-family: Arial, sans-serif;
 }
+
+label.details{
+  color:#999; 
+font-size:18px;
+font-weight:normal;
+position:absolute;
+pointer-events:none;
+left:5px;
+top:10px;
+transition:0.2s ease all; 
+-moz-transition:0.2s ease all; 
+-webkit-transition:0.2s ease all;
+font-family: Arial, sans-serif;
+}
+
+/* active state */
+input:focus ~ label.details, input:valid ~ label.details 		{
+  top:-20px;
+  font-size:18px;
+  color:#999;
+  }
 
 /* active state */
 input:focus ~ label, input:valid ~ label 		{
@@ -111,7 +134,7 @@ color:#ced0db;
 }
 
 /* BOTTOM BARS ================================= */
-.bar 	{ position:relative; display:block; width:300px; }
+.bar 	{ position:relative; display:block; width:330px; }
 .bar:before, .bar:after 	{
 content:'';
 height:2px; 
@@ -173,7 +196,7 @@ to 	{ width:0; background:transparent; }
 
 input[type=number] {
   font-size: calc(10px + 2vmin);
-  width: 300px;
+  width: 330px;
 }
 
 button {
@@ -226,7 +249,7 @@ button:hover{
   }
 textarea {
   font-size: calc(10px + 2vmin);
-  font-family: monaco, Consolas, "Lucida Console", monospace;
+  font-family: Arial, sans-serif;
 }
 
 .ContractInfo {
@@ -236,8 +259,8 @@ textarea {
   height: 7em;
   padding: 2vw;
   white-space: pre;
-  background-color:#91fff8;
-  color: #3d8a7c;
+  background-color:#0d82e9;
+  color: #FFFFFF;
   display: block;
   border: solid black 2px;
   overflow-x: scroll;
@@ -256,4 +279,20 @@ div{
 
 b{
   color: #1199FA;
+}
+
+h4{
+  text-align: left;
+}
+
+table.financial{
+  font-size: small;
+  text-align: left;
+}
+table{
+  text-align: left;
+}
+
+.left{
+  text-align: left;
 }
