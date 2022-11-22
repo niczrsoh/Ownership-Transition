@@ -42,15 +42,16 @@ exports.DeployerOrAttacher = class extends React.Component {
           <button
             onClick={() => parent.selectDeployer("retailer")}
           >Deployer</button>
-          <br /> Create an item, deploy the contract.<br></br>
-          Sell it to the <b>BUYER</b>.<br></br>
+          <br /> 
+          <div class='selection'>☑️ Create an item, <b>deploy</b> the contract.<br></br>
+          &nbsp; &nbsp; &nbsp;&nbsp;Sell it to the <b>buyer</b>.<br></br></div>
         </p>
         <p>
           <button
             onClick={() => parent.selectAttacher("retailer")}
           >Attacher</button>
-          <br /> Attach to the Manufacturer's contract.<br></br>
-          Buy item from the MANUFACTURER.<br></br>
+          <br /><div class='selection'>☑️ <b>Attach</b> to the <b>Manufacturer's</b> contract.<br></br>
+          &nbsp; &nbsp; &nbsp;&nbsp;Buy item from the <b>manufacturer</b>.<br></br></div>
         </p>
       </div>
     );

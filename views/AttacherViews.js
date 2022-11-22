@@ -8,7 +8,7 @@ exports.Wrapper = class extends React.Component {
     const {content,role} = this.props;
     return (
       <div className="Attacher">
-        <h2>Attacher {role}</h2>
+        <h2><b>Attacher {role}</b></h2>
         {content}
       </div>
     );
@@ -21,7 +21,7 @@ exports.Login = class extends React.Component {
     const {parent,role} = this.props;
     return (
       <div className='login'>
-        <h2>Login as {role}</h2>
+        <h2>Login as <b>{role}</b></h2>
         <hr />
         <br></br>
         <div className="group">
@@ -47,7 +47,7 @@ exports.LoginFail = class extends React.Component {
     return(
       <div className="app">
           <div className="login-form">
-        <div>User fails to log in</div>
+        <div>User <b>fails</b> to log in</div>
         <button
           onClick={() => parent.login()}
         >Login Again</button>
@@ -97,7 +97,7 @@ exports.AcceptTerms = class extends React.Component {
     return (
       <div>
         <br /> Price: {price} {standardUnit}
-        <br />
+        <br /><br></br>
         <button
           disabled={disabled}
           onClick={() => {
@@ -116,8 +116,8 @@ exports.ConfirmPurchase = class extends React.Component {
     const {disabled} = this.state || {};
     return (
       <div>
-        This is the purchasement of <h4 id='itemname'>{name}</h4> with the price {price}{standardUnit}
-        <br />
+        This is the purchasement of <h4 id='itemname'>{name}</h4> with the price <b>{price}{standardUnit}</b>
+        <br /><br></br>
         <button
         disabled={disabled}
           onClick={() => {
@@ -148,12 +148,19 @@ exports.seeDetails = class extends React.Component {
     var tname = name.replace(/[^a-z^A-Z^0-9 ]/g,"");
     return (
       <div>
-        Item name: <strong>{tname}</strong> <br></br>
-        Price (pay to deploy): <strong>{price}</strong> {standardUnit} <br></br>
-        Item detail: <strong>{words[0]}</strong> <br></br>
-        Item origin: <strong>{words2[0]}</strong> <br></br>
-        Phone Number: <strong>{words3}</strong> <br></br>
-        <br />
+        <table>
+          <tr>
+        <th>Item name: </th><td><b>{tname}</b></td> <br></br></tr>
+        <tr>
+        <th>Price (pay to deploy): </th><td><b>{price}&nbsp; {standardUnit}</b></td> <br></br></tr>
+        <tr>
+        <th>Item detail: </th><td><b>{words[0]}</b></td> <br></br></tr>
+        <tr>
+        <th>Item origin: </th><td><b>{words2[0]}</b></td> <br></br></tr>
+        <tr>
+        <th>Phone Number: </th><td><b>{words3}</b></td> <br></br></tr>
+        </table>
+        <br /><br></br>
         <button
         disabled={disabled}
           onClick={() => {
@@ -181,7 +188,7 @@ exports.reportPayment = class extends React.Component {
       const {disabled} = this.state || {};
       return (
         <div>
-         Now you will pay {price} Algo for <h4 id='itemname'>{name}!</h4>
+         Now you will pay <b>{price} Algo</b> for <h4 id='itemname'>{name}</h4>!
           <br />
         </div>
       );

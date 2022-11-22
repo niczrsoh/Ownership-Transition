@@ -196,7 +196,7 @@ exports.Deploy = class extends React.Component {
         <tr>
         <th>Item name: </th><td><b>{name}</b></td> <br></br>
         </tr><tr>
-        <th>Price (pay to deploy): </th><td><b>{price}</b> {standardUnit} </td><br></br>
+        <th>Price (pay to deploy): </th><td><b>{price} {standardUnit}</b> </td><br></br>
         </tr><tr>
         <th>Item detail: </th><td><b>{words[0]}</b></td> <br></br>
         </tr><tr>

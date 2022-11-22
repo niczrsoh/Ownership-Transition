@@ -6,7 +6,7 @@ exports.ReportRejectDeployer = class extends React.Component {
   render() {
     return (
       <div>
-        The attacher reject the item 
+        The attacher <b>reject</b> the item 
       </div>
     );
   }
@@ -15,7 +15,7 @@ exports.ReportRejectAttacher = class extends React.Component {
   render() {
     return (
       <div>
-       You reject the item 
+       You <b>reject</b> the item 
       </div>
     );
   }
@@ -26,9 +26,9 @@ exports.ReportTransferDeployer = class extends React.Component {
     return (
       <div>
        {user.replace(' ','')} bought {item} <br/><br/> 
-       {user} paid {payment} Algo to the contract <br/><br/>
-       The contract paid {payment} Algo to you <br/><br/>
-       Now {user} own the item
+       <b>{user}</b> paid <b>{payment} Algo</b> to the contract <br/><br/>
+       The contract paid <b>{payment} Algo</b> to you <br/><br/>
+       Now <b>{user} own</b> the item
       </div>
     );
   }
@@ -38,8 +38,8 @@ exports.ReportTransferAttacher = class extends React.Component {
     const {payment,user,item} = this.props;
     return (
       <div>
-       You paid {payment} Algo to the contract <br/><br/>
-       Now you own {item} from {user}
+       You paid <b>{payment} Algo</b> to the contract <br/><br/>
+       Now <b>you own {item}</b> from {user}
       </div>
     );
   }
