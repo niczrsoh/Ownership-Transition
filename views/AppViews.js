@@ -8,7 +8,7 @@ exports.Wrapper = class extends React.Component {
     return (
       <div className='dashboard'>
         <div className='logo'>
-          <br></br>Get linked up&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br></br><br></br><br></br>
+          <br></br>Although we are simple,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br></br>but we provide the BEST SOLUTION&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br></br><br></br>
         </div>
       <div className="App">
         <header className="App-header" id="root">
@@ -43,7 +43,7 @@ exports.DeployerOrAttacher = class extends React.Component {
             onClick={() => parent.selectDeployer("retailer")}
           >Deployer</button>
           <br /> Create an item, deploy the contract.<br></br>
-          Sell it to the BUYER.<br></br>
+          Sell it to the <b>BUYER</b>.<br></br>
         </p>
         <p>
           <button
@@ -62,28 +62,30 @@ exports.ThreeUsers = class extends React.Component {
     const {parent} = this.props;
     return (
       <div>
-        Please select a role:
-        <br />
+        <font size="+2">Please select a <b>role</b>:</font>
+        <hr />
         <p>
           <button
             onClick={() => parent.selectDeployer("manufacturer")}
           >Manufacturer</button>
-          <br /> Create an item, deploy the contract.<br></br>
-          Sell it to the RETAILER.<br></br>
+          <br />  <div className="selection">
+            ☑️ Create an item, <b>deploy</b> the contract.<br></br>
+            <b>&nbsp; &nbsp; &nbsp; Sell</b> it to the <b>retailer</b>.
+          </div><br></br>
         </p>
         <p>
           <button
             onClick={() => parent.DeployerOrAttacher("retailer")}
           >Retailer</button>
-          <br /> Attach to the Manufacturer's contract.<br></br>
-          or<br></br>
-          Create an item, deploy the contract.
+          <br /> <div className="selection">☑️ <b>Attach</b> to the <b>Manufacturer's</b> contract.<br></br>
+          <div className="center">or</div>
+          ☑️ Create an item, <b>deploy</b> the contract.</div><br></br>
         </p>
         <p>
           <button
             onClick={() => parent.selectAttacher("buyer")}
           >Buyer</button>
-          <br /> Attach to the Retailer's contract.
+          <br /> <div className="selection"> ☑️ <b>Attach</b> to the <b>Retailer's</b> contract. </div><br></br>
         </p>
       </div>
     );

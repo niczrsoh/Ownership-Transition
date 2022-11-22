@@ -24,7 +24,6 @@ exports.Login = class extends React.Component {
     return (
       <div className='login'>
         <h2>Login as {role}</h2>
-        Enter your username and password
         <hr />
         <br></br>
         <div class="group">
@@ -39,7 +38,7 @@ exports.Login = class extends React.Component {
       <span class="bar"></span>
         <label>Password: &nbsp;</label>
         </div>
-        <button onClick={()=>parent.reportUser(uName,password)}>Save</button>
+        <button class="button2" onClick={()=>parent.reportUser(uName,password)}>Save</button>
       </div>
     );
   }
@@ -136,7 +135,7 @@ exports.reportDetails = class extends React.Component {
         <h3>State {name} details and origin</h3>
         {/*Details*/}
         <div class="group">
-        <br></br>
+        <br></br><br></br>
         <textarea
           name="itemDetail" rows="4" cols="50"
           placeholder='Details out the item'
@@ -145,28 +144,29 @@ exports.reportDetails = class extends React.Component {
         <span class="highlight"></span>
       <span class="bar"></span>
         <label>  
-        {name} Details: </label>
+        {name} details: </label>
         </div>
         {/*Origin*/}
         <div class="group">
+        <br></br>
         <input
           type='text'
           placeholder='Details out the origin of your item'
           onChange={(e) => this.setState({origin: e.currentTarget.value})}
         /> 
         <span class="highlight"></span>
-      <span class="bar"></span>
+      <span class="bar"></span><br/>
         <label>  
-        {name} Origin:</label>
+        {name} origin:</label>
         </div>
      {/*Phone Number*/}
         <div class="group">
           <br></br>
-        <input type="tel" id="phone" name="phone" placeholder="010-1234567" pattern="[0-9]{3}-[0-9]{7}" 
+        <input type="tel" name="phone" placeholder="010-1234567" pattern="[0-9]{3}-[0-9]{7}" 
          onChange={(e) => this.setState({phone: e.currentTarget.value})}
-        required/>
+        />
         <span class="highlight"></span>
-      <span class="bar"></span>
+      <span class="bar"></span><br/>
         <label>  
          Phone number: </label>
         </div>
