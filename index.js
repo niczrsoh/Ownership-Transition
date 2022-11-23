@@ -121,7 +121,7 @@ render() { return renderView(this, DeployerViews); }
     //edit and change the retailer functions here!!
     constructor(props) {
       super(props);
-      this.state = {view: "Login",role: this.props.role, user: "",iname: "", iprice:0, answer: false};
+      this.state = {view: "Login",role: this.props.role, user: "",iname: "", iprice:0,id:0, answer: false};
     }
     login(){
       this.setState({view:'Login'});
@@ -155,13 +155,14 @@ render() { return renderView(this, DeployerViews); }
 
     async confirmPurchase(name,price,detail,id){
       price = parseInt(price);
-      console.log(name+" "+price);
+    
       return await new Promise(resolveAcceptedP => {
           this.setState({view: 'ConfirmPurchase', name, price, detail,id,resolveAcceptedP});
       });
     }
 
     seeDetails(answer,name,price,detail,id){
+      console.log(name+" "+price+" "+id);
       this.setState({view:'seeDetails',name, price,detail,id})
     }
 

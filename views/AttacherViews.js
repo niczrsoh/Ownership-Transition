@@ -140,7 +140,7 @@ exports.ConfirmPurchase = class extends React.Component {
 
 exports.seeDetails = class extends React.Component {
   render() {
-    const {name, price, detail, standardUnit,parent} = this.props;
+    const {name, price, detail,id, standardUnit,parent} = this.props;
     const {disabled} = this.state || {};
     var words = detail.split("&&&&&");
     var words2 = words[1].split("{}{}{}");
@@ -150,6 +150,8 @@ exports.seeDetails = class extends React.Component {
       <div>
         <table>
           <tr>
+        <th>Item id: </th><td><b>{id}</b></td> <br></br></tr>
+        <tr>
         <th>Item name: </th><td><b>{tname}</b></td> <br></br></tr>
         <tr>
         <th>Price (pay to deploy): </th><td><b>{price}&nbsp; {standardUnit}</b></td> <br></br></tr>
