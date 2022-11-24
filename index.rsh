@@ -1,7 +1,7 @@
 'reach 0.1';
 const commonInteract = {
   reportReject: Fun([Bytes(1)], Null),
-  reportTransfer: Fun([Bytes(1),UInt,Bytes(128),Bytes(128)], Null),
+  reportTransfer: Fun([Bytes(1),UInt,Bytes(128),Bytes(128),UInt,Bytes(128)], Null),
   reportRole: Bytes(128),
 };
 const deployerInteract = {
@@ -49,9 +49,9 @@ export const main = Reach.App(() => {
 
   commit();
   attacher.pay(iprice);
-  deployer.interact.reportTransfer('M',iprice,rName,iname);
+  deployer.interact.reportTransfer('M',iprice,rName,idetails,id,iname);
   transfer(iprice).to(deployer);
-  attacher.interact.reportTransfer('R',iprice,mName,iname);
+  attacher.interact.reportTransfer('R',iprice,mName,idetails,id,iname);
   commit();
 
   exit();

@@ -4,6 +4,72 @@ body {
   -moz-osx-font-smoothing: grayscale;
   font-family: "Poppins", sans-serif;
 }
+.rightCorner1:after{
+  background-image: url("reach.png");
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  width: 156px;
+  height: 60px;
+}
+.rightCorner2{
+  background-image: url("algorand.png");
+  position: absolute;
+  bottom: 0px;
+  right: 10px;
+}
+.leftCorner{
+  background-image: url("utm.png");
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+}
+.twoButtons {
+  display: grid; 
+  grid-template-columns: 1fr 1fr; 
+  grid-gap: 20px;    
+  width: 100%; 
+}
+.loginTitle{
+  text-align: center;
+  justify-content: center;
+}
+.copyrightWords{
+  text-align: center;
+  justify-content: center;
+  padding-top: 10px;
+}
+.copyright{
+  background-color: white;
+  
+}
+.loginBox{
+  margin-top: 20px;
+  border: 1px solid grey;
+  width: auto;
+  padding: 30px;
+  border-radius: 25px;
+}
+.selectionParent {
+  display: grid; 
+  grid-template-columns: 1fr 1fr 1fr; 
+  grid-gap: 20px; 
+  border: 1px solid black; 
+  width: 100%; 
+}
+.selectionParent2 {
+  display: grid; 
+  grid-template-columns: 1fr 1fr; 
+  grid-gap: 20px; 
+  border: 1px solid black; 
+  width: 100%; 
+}
+
+.selChild {
+  margin: 10px; 
+  border: 1px solid grey;
+  padding: 20px;
+}
 
 code {
   font-family: Copperplate, "Copperplate Gothic Light", fantasy;
@@ -49,7 +115,6 @@ code {
     left: 30px;
     background-image: url("logo02s_156_60.png");
 }
-
 .App-header {
   min-height: 100vh;
   display: flex;
@@ -63,6 +128,27 @@ code {
 
 @import url("https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900");
 
+.cert {
+  margin-left: 100px;
+  text-align: center;
+  background-color: white;
+  font-size: 20px;
+  border: 1px solid lightgray; 
+  height: 438.5px;
+  width: 310px;
+  color: #000000;  background-image: url('back.png');
+  background-size: cover;
+}
+
+.certTable{
+  margin: 20px;
+}
+.tick{
+  color: green;
+  font-size: 100px;
+  text-align: left;
+  justify-content: center;
+}
 #root {
 position: relative;
 }

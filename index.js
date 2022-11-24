@@ -10,13 +10,14 @@ const reach = loadStdlib(process.env)
 
 import {ALGO_MyAlgoConnect as MyAlgoConnect} 
  from '@reach-sh/stdlib';
-reach.setWalletFallback(reach.walletFallback({providerEnv:'TestNet', MyAlgoConnect }));
+//reach.setWalletFallback(reach.walletFallback({providerEnv:'TestNet', MyAlgoConnect }));
 const {standardUnit} = reach;
 const defaults = {defaultFundAmt: '10', defaultPrice: '1', standardUnit};
 
 class App extends React.Component{
     constructor(props){
         super(props);
+       // this.state={view: 'ReportTransferAttacher',payment:0,user:'man',item:'dah',detail:'dadaj&&&&&iudaf{}{}{}fkak',id:'1254'};
         this.state={view: 'ConnectAccount', ...defaults, role:""};
     }
   
@@ -37,26 +38,26 @@ class App extends React.Component{
       }
       render(){return renderView(this, AppViews)}
       async skipFundAccount() { this.setState({view: 'ThreeUsers'}); }
-      DeployerOrAttacher(role) { 
-        this.setState({view: 'DeployerOrAttacher', role}); }
+      DeployerOrAttacher(role) {   
+      this.setState({view: 'DeployerOrAttacher', role}); }
       selectAttacher(role) { this.setState({view: 'Wrapper', ContentView: Attacher,role}); }
       selectDeployer(role) { 
-        this.setState({view: 'Wrapper',ContentView: Deployer, role}); }
+      this.setState({view: 'Wrapper',ContentView: Deployer, role}); }
 }
 
 class Owner extends React.Component {
-
     reportReject(role){ 
       if(role=='M') this.setState({view: 'ReportRejectDeployer'}) 
       else this.setState({view: 'ReportRejectAttacher'}) 
     }
 
-    reportTransfer(role,payment,user,item){ 
+    reportTransfer(role,payment,user,detail, id,item){ 
       payment = parseInt(payment);
       item = item.replace(/[^a-zA-Z ]/g, "");
       user = user.replace(/[^a-zA-Z ]/g, "");
+      console.log(payment);
       if(role=='M') this.setState({view: 'ReportTransferDeployer',payment,user,item}) 
-      else this.setState({view: 'ReportTransferAttacher',payment,user,item}) 
+      else this.setState({view: 'ReportTransferAttacher',payment,user,item,detail,id}) 
     }
 
   }
@@ -71,12 +72,13 @@ class Owner extends React.Component {
       console.log(id);
       this.reportID = id;
       this.state = {view:'Login',role:this.props.role, balance: this.props.bal, phone: "",
-       price: this.props.defaultPrice, name: "", details:"", user: "", id, ctcInfoStr: ""}
+       price: this.props.defaultPrice, name: "", details:"", user: "",uPw:"", id, ctcInfoStr: ""}
   }
     login(){
       this.setState({view:'Login'});
     }
     reportUser(user,uPw){
+      this.state.uPw = uPw;
       console.log("username: "+user+"password: "+uPw)
       if(this.props.role=='manufacturer'){
         if(user=='alice'&&uPw=='a1234'){
@@ -108,6 +110,7 @@ class Owner extends React.Component {
       //details=detail&&&&&origin{}{}{}phone
       this.reportDetails = this.state.details;
       console.log(this.state.user);
+      console.log(this.state.price);
       console.log(this.state.details);
       this.deadline={ETH: 10, ALGO: 100, CFX: 1000}[reach.connector];
       backend.deployer(ctc, this);
@@ -145,7 +148,10 @@ render() { return renderView(this, DeployerViews); }
           }
         }
     }  
-    
+    haveOwner(owner){
+      this.setState({view: 'GetOwner', owner});
+    }
+
     attach(ctcInfoStr) {
       this.reportUser = this.state.user;
       const ctc = this.props.acc.contract(backend, JSON.parse(ctcInfoStr));
@@ -153,9 +159,9 @@ render() { return renderView(this, DeployerViews); }
       backend.attacher(ctc, this);
     }
 
+   
     async confirmPurchase(name,price,detail,id){
       price = parseInt(price);
-    
       return await new Promise(resolveAcceptedP => {
           this.setState({view: 'ConfirmPurchase', name, price, detail,id,resolveAcceptedP});
       });
