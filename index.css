@@ -1,54 +1,386 @@
 body {
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-      sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: "Poppins", sans-serif;
+}
+.rightCorner1:after{
+  background-image: url("reach.png");
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  width: 156px;
+  height: 60px;
+}
+.rightCorner2{
+  background-image: url("algorand.png");
+  position: absolute;
+  bottom: 0px;
+  right: 10px;
+}
+.leftCorner{
+  background-image: url("utm.png");
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+}
+.twoButtons {
+  display: grid; 
+  grid-template-columns: 1fr 1fr; 
+  grid-gap: 20px;    
+  width: 100%; 
+}
+.loginTitle{
+  text-align: center;
+  justify-content: center;
+}
+.copyrightWords{
+  text-align: center;
+  justify-content: center;
+  padding-top: 10px;
+}
+.copyright{
+  background-color: white;
   
-  code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-      monospace;
+}
+.loginBox{
+  margin-top: 20px;
+  border: 1px solid grey;
+  width: auto;
+  padding: 30px;
+  border-radius: 25px;
+}
+.selectionParent {
+  display: grid; 
+  grid-template-columns: 1fr 1fr 1fr; 
+  grid-gap: 20px; 
+  border: 1px solid black; 
+  width: 100%; 
+}
+.selectionParent2 {
+  display: grid; 
+  grid-template-columns: 1fr 1fr; 
+  grid-gap: 20px; 
+  border: 1px solid black; 
+  width: 100%; 
+}
+
+.selChild {
+  margin: 10px; 
+  border: 1px solid grey;
+  padding: 20px;
+}
+
+code {
+  font-family: Copperplate, "Copperplate Gothic Light", fantasy;
+}
+.App {
+  text-align: center;
+}
+.selection{
+  padding-left: 10px;
+  text-align: left;
+  font-size: 18px;
+}
+.center{
+  text-align: center;
+}
+
+.logo{
+  background-color: whitesmoke;
+  width:100%;
+  height: 10%;
+  -moz-box-shadow: inset 0 -10px 10px -10px #000000;
+  -webkit-box-shadow: inset 0 -10px 10px -10px #000000;
+  box-shadow: inset 0 -10px 10px -10px #000000;
+  text-align: right;
+  font-size: 20px;
+  color: rgb(56, 48, 28);
+  font-family: Georgia, serif;
+}
+
+.dashboard{
+  background-color: #061121;
+  position: relative;
+  top: 0;
+  left: 0;
+}
+.dashboard:after
+{
+    content: '';
+    width: 156px;
+    height: 60px;
+    position: absolute;
+    top: 5px;
+    left: 30px;
+    background-image: url("logo02s_156_60.png");
+}
+.App-header {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+  font-family: "Poppins", sans-serif;
+}
+
+@import url("https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900");
+
+.cert {
+  margin-left: 100px;
+  text-align: center;
+  background-color: white;
+  font-size: 20px;
+  border: 1px solid lightgray; 
+  height: 438.5px;
+  width: 310px;
+  color: #000000;  background-image: url('back.png');
+  background-size: cover;
+}
+
+.certTable{
+  margin: 20px;
+}
+.tick{
+  color: green;
+  font-size: 100px;
+  text-align: left;
+  justify-content: center;
+}
+#root {
+position: relative;
+}
+
+h1{
+  font-size: 70px;
+}
+
+/* form starting stylings ------------------------------- */
+.group 			  { 
+text-align:center;
+position:relative; 
+margin-bottom:45px; 
+font-family: Arial, sans-serif;
+}
+
+input 				{
+font-size:18px;
+padding:10px 10px 10px 5px;
+display:block;
+width:330px;
+border:none;
+border-bottom:1px solid #757575;
+font-family: Arial, sans-serif;
+}
+input:focus 		{ outline:none; }
+
+/* LABEL ======================================= */
+label 				 {
+color:#999; 
+font-size:18px;
+font-weight:normal;
+position:absolute;
+pointer-events:none;
+left:5px;
+top:10px;
+transition:0.2s ease all; 
+-moz-transition:0.2s ease all; 
+-webkit-transition:0.2s ease all;
+font-family: Arial, sans-serif;
+}
+
+label.details{
+  color:#999; 
+font-size:18px;
+font-weight:normal;
+position:absolute;
+pointer-events:none;
+left:5px;
+top:10px;
+transition:0.2s ease all; 
+-moz-transition:0.2s ease all; 
+-webkit-transition:0.2s ease all;
+font-family: Arial, sans-serif;
+}
+
+/* active state */
+input:focus ~ label.details, input:valid ~ label.details 		{
+  top:-20px;
+  font-size:18px;
+  color:#999;
   }
-  .App {
-    text-align: center;
+
+/* active state */
+input:focus ~ label, input:valid ~ label 		{
+top:-20px;
+font-size:14px;
+color:#ced0db;
+}
+
+/* BOTTOM BARS ================================= */
+.bar 	{ position:relative; display:block; width:330px; }
+.bar:before, .bar:after 	{
+content:'';
+height:2px; 
+width:0;
+bottom:1px; 
+position:absolute;
+background:#5264AE; 
+transition:0.2s ease all; 
+-moz-transition:0.2s ease all; 
+-webkit-transition:0.2s ease all;
+}
+.bar:before {
+left:50%;
+}
+.bar:after {
+right:50%; 
+}
+
+/* active state */
+input:focus ~ .bar:before, input:focus ~ .bar:after {
+width:50%;
+}
+
+/* HIGHLIGHTER ================================== */
+.highlight {
+position:absolute;
+height:60%; 
+width:100px; 
+top:25%; 
+left:0;
+pointer-events:none;
+opacity:0.5;
+}
+
+/* active state */
+input:focus ~ .highlight {
+-webkit-animation:inputHighlighter 0.3s ease;
+-moz-animation:inputHighlighter 0.3s ease;
+animation:inputHighlighter 0.3s ease;
+}
+
+/* ANIMATIONS ================ */
+@-webkit-keyframes inputHighlighter {
+from { background:#5264AE; }
+to 	{ width:0; background:transparent; }
+}
+@-moz-keyframes inputHighlighter {
+from { background:#5264AE; }
+to 	{ width:0; background:transparent; }
+}
+@keyframes inputHighlighter {
+from { background:#5264AE; }
+to 	{ width:0; background:transparent; }
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+input[type=number] {
+  font-size: calc(10px + 2vmin);
+  width: 330px;
+}
+
+button {
+  font-size: calc(6px + 2vmin);
+  display:inline-block;
+  padding: 0.3em 2em;
+  border:0.23em solid #FFFFFF;
+  margin:0 0.3em 0.3em 0;
+  box-sizing: border-box;
+  text-decoration:none;
+  font-family: Arial, sans-serif;
+  font-weight:400;
+  color:#000000;
+  text-align:center;
+  transition: all 0.15s;
+}
+
+button:hover{
+  color:#0d82e9;
+  border-color:#BBBBBB;
   }
-  
-  .App-header {
-    background-color: #282c34;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
+  button:active{
+    color:#0d82e984;
+    border-color:#BBBBBB;
   }
-  
-  .App-link {
-    color: #61dafb;
+
+.button2{
+  font-size: calc(6px + 2vmin);
+  display:inline-block;
+  padding: 0.3em 2em;
+  border:0.23em solid #FFFFFF;
+  margin:0 0.3em 0.3em 0;
+  box-sizing: border-box;
+  text-decoration:none;
+  font-family: Arial, sans-serif;
+  font-weight:400;
+  color:#FFFFFF;
+  text-align:center;
+  transition: all 0.15s;
+  background-color: transparent;
+}
+.button2:hover{
+  color:#FFFFFF;
+  border-color:#0d82e9;
   }
-  
-  input[type=number] {
-    font-size: calc(10px + 2vmin);
-    width: 4em;
+
+.button2:active{
+  color:#FFFFFF;
+    border-color:#0d82e984;
   }
-  
-  button {
-    font-size: calc(10px + 2vmin);
-  }
-  
-  textarea {
-    font-size: calc(10px + 2vmin);
-  }
-  
-  .ContractInfo {
-    font-size: calc(10px + 1vmin);
-    text-align: left;
-    width: 90vw;
-    height: 7em;
-    padding: 2vw;
-    overflow-x: scroll;
-    white-space: pre;
-  }
+textarea {
+  font-size: calc(10px + 2vmin);
+  font-family: Arial, sans-serif;
+}
+
+.ContractInfo {
+  font-size: calc(10px + 1vmin);
+  text-align: justify;
+  width: 30vw;
+  height: 7em;
+  padding: 2vw;
+  white-space: pre;
+  background-color:#0d82e9;
+  color: #FFFFFF;
+  display: block;
+  border: solid black 2px;
+  overflow-x: scroll;
+  overflow-y: scroll;
+  box-shadow: inset;
+  font-family: monaco, Consolas, "Lucida Console", monospace;
+}
+
+div{
+  font-family: Arial, sans-serif;
+}
+
+#itemname{
+  font-family: "Poppins", sans-serif;
+  text-align: center;
+  color: #1199FA;
+}
+
+b{
+  color: #1199FA;
+}
+
+h4{
+  text-align: left;
+}
+
+table.financial{
+  font-size: small;
+  text-align: left;
+}
+table{
+  text-align: left;
+}
+
+.left{
+  text-align: left;
+}

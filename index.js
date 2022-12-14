@@ -11,15 +11,14 @@ const reach = loadStdlib(process.env)
 import {ALGO_MyAlgoConnect as MyAlgoConnect} 
  from '@reach-sh/stdlib';
 reach.setWalletFallback(reach.walletFallback({providerEnv:'TestNet', MyAlgoConnect }));
-const handToInt = {'ROCK': 0, 'PAPER': 1, 'SCISSORS': 2};
-const intToOutcome = ['Bob wins!', 'Draw!', 'Alice wins!'];
 const {standardUnit} = reach;
 const defaults = {defaultFundAmt: '10', defaultPrice: '1', standardUnit};
 
 class App extends React.Component{
     constructor(props){
         super(props);
-        this.state={view: 'ConnectAccount', ...defaults};
+       // this.state={view: 'ReportTransferAttacher',payment:0,user:'man',item:'dah',detail:'dadaj&&&&&iudaf{}{}{}fkak',id:'1254'};
+        this.state={view: 'ConnectAccount', ...defaults, role:""};
     }
   
     async componentDidMount(){
@@ -30,99 +29,159 @@ class App extends React.Component{
         if(await reach.canFundFromFaucet()){
             this.setState({view:'FundAccount'});
         }else{
-            this.setState({view:'DeployerOrAttacher'});
+            this.setState({view:'ThreeUsers'});
         }
     }
     async fundAccount(fundAmount) {
         await reach.fundFromFaucet(this.state.acc, reach.parseCurrency(fundAmount));
-        this.setState({view: 'DeployerOrAttacher'});
+        this.setState({view: 'ThreeUsers'});
       }
       render(){return renderView(this, AppViews)}
-      async skipFundAccount() { this.setState({view: 'DeployerOrAttacher'}); }
-      selectAttacher() { this.setState({view: 'Wrapper', ContentView: Attacher}); }
-      selectDeployer() { this.setState({view: 'Wrapper', ContentView: Deployer}); }
+      async skipFundAccount() { this.setState({view: 'ThreeUsers'}); }
+      DeployerOrAttacher(role) {   
+      this.setState({view: 'DeployerOrAttacher', role}); }
+      selectAttacher(role) { this.setState({view: 'Wrapper', ContentView: Attacher,role}); }
+      selectDeployer(role) { 
+      this.setState({view: 'Wrapper',ContentView: Deployer, role}); }
 }
 
-class Player extends React.Component {
-
+class Owner extends React.Component {
     reportReject(role){ 
-      if(role=='M') this.setState({view: 'ReportRejectManufacturer'}) 
-      else this.setState({view: 'ReportRejectRetailer'}) 
-  }
-  reportPayment(role,payment){ 
-    if(role=='M') this.setState({view: 'ReportPaymentManufacturer',payment}) 
-    else this.setState({view: 'ReportPaymentRetailer',payment}) 
-}
-reportTransfer(role,payment){ 
-  if(role=='M') this.setState({view: 'ReportTransferManufacturer',payment}) 
-  else this.setState({view: 'ReportTransferRetailer',payment}) 
-}
+      if(role=='M') this.setState({view: 'ReportRejectDeployer'}) 
+      else this.setState({view: 'ReportRejectAttacher'}) 
+    }
+
+    reportTransfer(role,payment,user,detail, id,item){ 
+      payment = parseInt(payment);
+      item = item.replace(/[^a-zA-Z ]/g, "");
+      user = user.replace(/[^a-zA-Z ]/g, "");
+      console.log(payment);
+      if(role=='M') this.setState({view: 'ReportTransferDeployer',payment,user,item}) 
+      else this.setState({view: 'ReportTransferAttacher',payment,user,item,detail,id}) 
+    }
+
   }
 
-  class Deployer extends Player {
+  class Deployer extends Owner {
+    random(){return reach.hasRandom.random();}
     constructor(props){
       super(props);
-      this.state = {view:'Login', price: 0, name: "", user: "",ctcInfoStr: ""}
+      const min=1000000000;
+      const max=9999999999;
+      const id = Math.floor(Math.random() * (max - min + 1) ) + min;
+      console.log(id);
+      this.reportID = id;
+      this.state = {view:'Login',role:this.props.role, balance: this.props.bal, phone: "",
+       price: this.props.defaultPrice, name: "", details:"", user: "",uPw:"", id, ctcInfoStr: ""}
   }
+    login(){
+      this.setState({view:'Login'});
+    }
     reportUser(user,uPw){
+      this.state.uPw = uPw;
       console.log("username: "+user+"password: "+uPw)
-        if(user=='alice'&&uPw=='1234'){
+      if(this.props.role=='manufacturer'){
+        if(user=='alice'&&uPw=='a1234'){
           console.log(`Successfully login...`)
-          this.setState({view:"reportName"})
+          this.setState({view:"reportName", user})
         }else{
           console.log(`Unsuccessfully login...`)
-          this.setState({view: 'LoginFail', who: 'manufacturer'})
+          this.setState({view: 'LoginFail',user})
+        }}else{
+          if(user=='bob'&&uPw=='b2345'){
+            console.log(`Successfully login...`)
+            this.setState({view:"reportName", user})
+          }else{
+            console.log(`Unsuccessfully login...`)
+            this.setState({view: 'LoginFail',user})
+          }
         }
     }  
   reportName(name){this.setState({view: 'reportPrice', name});}
-  reportPrice(price){this.setState({view: 'Deploy', price});}
+  reportPrice(price,balance,name){this.setState({view: 'reportDetails', price});}
+  reportDetails(details,name){this.setState({view: 'Deploy', details});}
   async deploy(){
       const ctc=this.props.acc.contract(backend);
       this.setState({view: 'Deploying', ctc});
       this.reportUser = this.state.user;
       this.reportName = this.state.name;
-      this.reportPrice = reach.parseCurrency(this.state.price);
+      this.reportPrice = this.state.price;
+      //inside the details have the product detail, origin and deployer phone number
+      //details=detail&&&&&origin{}{}{}phone
+      this.reportDetails = this.state.details;
+      console.log(this.state.user);
+      console.log(this.state.price);
+      console.log(this.state.details);
       this.deadline={ETH: 10, ALGO: 100, CFX: 1000}[reach.connector];
-      backend.manufacturer(ctc, this);
+      backend.deployer(ctc, this);
   const ctcInfoStr = JSON.stringify(await ctc.getInfo(), null, 2);
-  this.setState({view: 'WaitingForAttacher', ctcInfoStr});
+  this.setState({view: 'WaitingForAttacher', ctcInfoStr,user: this.state.user});
 }
 render() { return renderView(this, DeployerViews); }
   }
 
-  class Attacher extends Player {
+  class Attacher extends Owner {
     //edit and change the retailer functions here!!
     constructor(props) {
       super(props);
-      this.state = {view: 'Login',user: ""};
+      this.state = {view: "Login",role: this.props.role, user: "",iname: "", iprice:0,id:0, answer: false};
+    }
+    login(){
+      this.setState({view:'Login'});
     }
     reportUser(user,uPw){
       console.log("username: "+user+"password: "+uPw)
-        if(user=='bob'&&uPw=='1234'){
+      if(this.props.role=='retailer'){
+        if(user=='bob'&&uPw=='b2345'){
           console.log(`Successfully login...`)
-          this.setState({view:"Attach"})
+          this.setState({view:"Attach", user})
         }else{
           console.log(`Unsuccessfully login...`)
-          this.setState({view: 'LoginFail', who: 'manufacturer'})
+          this.setState({view: 'LoginFail',user})
+        }}else{
+          if(user=='clarke'&&uPw=='c4248'){
+            console.log(`Successfully login...`)
+            this.setState({view:"Attach", user})
+          }else{
+            console.log(`Unsuccessfully login...`)
+            this.setState({view: 'LoginFail',user})
+          }
         }
     }  
+    haveOwner(owner){
+      this.setState({view: 'GetOwner', owner});
+    }
+
     attach(ctcInfoStr) {
       this.reportUser = this.state.user;
       const ctc = this.props.acc.contract(backend, JSON.parse(ctcInfoStr));
-      this.setState({view: 'Attaching'});
-      backend.retailer(ctc, this);
+      this.setState({view: 'Attaching',ctc});
+      backend.attacher(ctc, this);
     }
-    async acceptWager(wagerAtomic) { 
-      const wager = reach.formatCurrency(wagerAtomic, 4);
+
+   
+    async confirmPurchase(name,price,detail,id){
+      price = parseInt(price);
       return await new Promise(resolveAcceptedP => {
-        this.setState({view: 'AcceptTerms', wager, resolveAcceptedP});
+          this.setState({view: 'ConfirmPurchase', name, price, detail,id,resolveAcceptedP});
       });
     }
-    termsAccepted() {
-      this.state.resolveAcceptedP();
-      this.setState({view: 'WaitingForTurn'});
+
+    seeDetails(answer,name,price,detail,id){
+      console.log(name+" "+price+" "+id);
+      this.setState({view:'seeDetails',name, price,detail,id})
     }
-    render() { return renderView(this, AttacherViews); }
+
+    confirmPurchase2(answer){
+      this.state.resolveAcceptedP(answer);
+      this.setState({view:'reportPayment'})
+    }
+
+    reportPayment(name,price){
+          price = parseInt(price);
+          this.setState({view: 'reportPayment',name, price});
+      };
+      render(){return renderView(this, AttacherViews);}
   }
 
   renderDOM(<App />);

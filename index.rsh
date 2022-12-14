@@ -1,63 +1,58 @@
 'reach 0.1';
 const commonInteract = {
- 
   reportReject: Fun([Bytes(1)], Null),
-  reportPayment: Fun([Bytes(1),UInt], Null),
-  reportTransfer: Fun([Bytes(1),UInt], Null)
+  reportTransfer: Fun([Bytes(1),UInt,Bytes(128),Bytes(128),UInt,Bytes(128)], Null),
+  reportRole: Bytes(128),
 };
-const manufacturerInteract = {
+const deployerInteract = {
   ...commonInteract,
   reportUser: Bytes(128),//zr
   reportName: Bytes(128),
   reportPrice: UInt,
-  reportItemContract: Fun([Bytes(128),Bytes(128),UInt],Null),
-  reportShipping: Fun([Bytes(128)],Bytes(256))
+  reportDetails: Bytes(128),
+  reportID: UInt,
 };
-const retailerInteract = {
+const attacherInteract = {
   ...commonInteract,
   reportUser: Bytes(128),//zr
-  reportOwner: Fun([Bytes(128),Bytes(128)], Null),
-  confirmPurchase: Fun([Bytes(128),UInt], Bool)
+  reportPayment: Fun([Bytes(128),UInt], Null),
+  confirmPurchase: Fun([Bytes(128),UInt,Bytes(128),UInt], Bool),
 };
 export const main = Reach.App(() => {
-  const manufacturer = Participant('manufacturer', manufacturerInteract);
-  const retailer = Participant('retailer', retailerInteract);
+  const deployer = Participant('deployer', deployerInteract);
+  const attacher = Participant('attacher', attacherInteract);
   init();
-  
- 
-  manufacturer.only(()=>{
+
+  deployer.only(()=>{
     const mName  = declassify(interact.reportUser);
     const iname=declassify(interact.reportName);
     const iprice=declassify(interact.reportPrice);
-     //interact.reportItemContract(mName,iname,iprice);
+    const idetails =declassify(interact.reportDetails);
+    const id=declassify(interact.reportID);
   })
-  manufacturer.publish(mName,iname,iprice);
+  deployer.publish(mName,iname,iprice,idetails, id);
   commit();
   
-  retailer.only(() => { 
+  attacher.only(() => { 
     const rName = declassify(interact.reportUser);
-    const willBuy = declassify(interact.confirmPurchase(iname,iprice)); });
-  retailer.publish(rName,willBuy);
+    const willBuy = declassify(interact.confirmPurchase(iname,iprice,idetails,id)); 
+  });
+    
+  attacher.publish(rName,willBuy);
 
   if (!willBuy) {
     commit();
-    manufacturer.interact.reportReject('M');
-    retailer.interact.reportReject('R');
+    deployer.interact.reportReject('M');
+    attacher.interact.reportReject('R');
     exit();
   } 
+
   commit();
-  retailer.pay(iprice);
-  manufacturer.interact.reportPayment('M',iprice);
-  retailer.interact.reportPayment('R',iprice);
+  attacher.pay(iprice);
+  deployer.interact.reportTransfer('M',iprice,rName,idetails,id,iname);
+  transfer(iprice).to(deployer);
+  attacher.interact.reportTransfer('R',iprice,mName,idetails,id,iname);
   commit();
 
-  manufacturer.only(()=>{const message = declassify(interact.reportShipping(iname));})
-  manufacturer.publish(message)
-  transfer(iprice).to(manufacturer);
-  commit();
- 
-  manufacturer.interact.reportTransfer('M',iprice);
-  retailer.interact.reportTransfer('R',iprice);
-  retailer.interact.reportOwner(rName,iname);
   exit();
 });
